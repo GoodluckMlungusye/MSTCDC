@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Webpage</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+   <!-- Header: Search Bar and Navigation Bar -->
+   <header class="header-container">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="brand-name">
+                <h1>Company Name</h1>
+            </div>
+            <!-- Hamburger Menu Icon -->
+            <div class="hamburger" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search products...">
+    </div>
+    
+</header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Your Amazing Tagline Here</h2>
+        <div class="hero-buttons">
+          <button>Register</button>
+          <button>Login</button>
+        </div>
+      </div>
+      <div class="slider">
+        <img class="slide" src="./assets/h1.png" alt="Slide 1" />
+        <img class="slide" src="./assets/h2.jpg" alt="Slide 2" />
+        <img class="slide" src="./assets/h3.jpg" alt="Slide 3" />
+        <img class="slide" src="./assets/h4.jpg" alt="Slide 4" />
+        <img class="slide" src="./assets/h5.jpg" alt="Slide 5" />
+        <img class="slide" src="./assets/h6.jpg" alt="Slide 6" />
+        <img class="slide" src="./assets/h7.jpg" alt="Slide 7" />
+      </div>
+    </section>
+
+<!-- Stats Section -->
+<section class="stats" id="stats">
+    <div class="container">
+        <div class="stats-container">
+            <div class="stat-column">
+                <h2 class="count-up" data-target="100">0</h2>
+                <p>Satisfied Clients</p>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="stat-column">
+                <h2 class="count-up" data-target="50">0</h2>
+                <p>Projects Completed</p>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="stat-column">
+                <h2 class="count-up" data-target="30">0</h2>
+                <p>Team Members</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- List of Items from API -->
+    <section class="items">
+      <div class="container">
+        <h2>Our Products</h2>
+        <div class="item-list" id="item-list">
+          <!-- Items will be injected here from the API -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 Company Name. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
