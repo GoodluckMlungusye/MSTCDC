@@ -28,25 +28,25 @@ showSlide(currentSlide);
 // Slide every 3 seconds
 setInterval(nextSlide, 3000);
 
-// Fetch Items from Fake API and display them
+// Fetch Courses API and display them
 const itemList = document.getElementById("item-list");
 const categoryButtonsContainer = document.getElementById("category-buttons");
 const categorySkeletons = document.getElementById("category-skeleton");
 const productSkeletons = document.getElementById("product-skeletons");
-let products = []; // Store all products
-let categories = []; // Store categories
+let courses = [];
+let categories = [];
 
 // Show skeletons while fetching data
-categorySkeletons.style.display = "flex"; // Show category skeletons
-productSkeletons.style.display = "flex"; // Show product skeletons
+categorySkeletons.style.display = "flex";
+productSkeletons.style.display = "flex";
 
-// Fetch all products
+// Fetch all courses
 fetch("https://fakestoreapi.com/products")
   .then((response) => response.json())
   .then((data) => {
-    products = data;
-    displayProducts(products);
-    productSkeletons.style.display = "none"; // Hide product skeletons after loading
+    courses = data;
+    displayCourses(courses);
+    productSkeletons.style.display = "none";
   })
   .catch((error) => console.error("Error fetching the API:", error));
 
@@ -56,7 +56,7 @@ fetch("https://fakestoreapi.com/products/categories")
   .then((data) => {
     categories = data;
     createCategoryButtons(categories);
-    categorySkeletons.style.display = "none"; // Hide category skeletons after loading
+    categorySkeletons.style.display = "none";
   })
   .catch((error) => console.error("Error fetching categories:", error));
 
@@ -64,14 +64,14 @@ fetch("https://fakestoreapi.com/products/categories")
 function createCategoryButtons(categories) {
   const allButton = document.createElement("button");
   allButton.textContent = "All";
-  allButton.classList.add("active"); // "All" is active by default
+  allButton.classList.add("active");
   allButton.addEventListener("click", () => filterProductsByCategory("all"));
   categoryButtonsContainer.appendChild(allButton);
 
   categories.forEach((category) => {
     const categoryButton = document.createElement("button");
     categoryButton.textContent =
-      category.charAt(0).toUpperCase() + category.slice(1); // Capitalize first letter
+      category.charAt(0).toUpperCase() + category.slice(1);
     categoryButton.addEventListener("click", () =>
       filterProductsByCategory(category)
     );
@@ -79,9 +79,8 @@ function createCategoryButtons(categories) {
   });
 }
 
-// Function to filter products by category
+// Function to filter courses by category
 function filterProductsByCategory(category) {
-  // Remove 'active' class from all buttons
   const allButtons = document.querySelectorAll(".category-buttons button");
   allButtons.forEach((button) => button.classList.remove("active"));
 
@@ -94,15 +93,14 @@ function filterProductsByCategory(category) {
   clickedButton.classList.add("active");
 
   if (category === "all") {
-    displayProducts(products); // Show all products if 'All' is clicked
+    displayCourses(courses);
   } else {
-    // Show product skeletons while fetching filtered products
     productSkeletons.style.display = "flex";
     fetch(`https://fakestoreapi.com/products/category/${category}`)
       .then((response) => response.json())
       .then((data) => {
-        displayProducts(data); // Display filtered products by category
-        productSkeletons.style.display = "none"; // Hide product skeletons after loading
+        displayCourses(data);
+        productSkeletons.style.display = "none";
       })
       .catch((error) =>
         console.error("Error fetching products by category:", error)
@@ -110,18 +108,18 @@ function filterProductsByCategory(category) {
   }
 }
 
-// Function to display products
-function displayProducts(items) {
-  itemList.innerHTML = ""; // Clear the item list
+// Function to display courses
+function displayCourses(items) {
+  itemList.innerHTML = "";
   items.forEach((item) => {
     const itemCard = document.createElement("div");
     itemCard.classList.add("item-card");
 
     itemCard.innerHTML = `
             <img src="${item.image}" alt="${item.title}">
-            <h3>${item.title}</h3>
-            <p>${item.description.slice(0, 100)}...</p>
-            <button>Learn More</button>
+            <h5>${item.title}</h5>
+            <p>Added on: 12th Jan 2024</p>
+            <button>Read More</button>
         `;
     itemList.appendChild(itemCard);
   });
@@ -132,16 +130,16 @@ const searchInput = document.getElementById("search-input");
 
 searchInput.addEventListener("input", function (e) {
   const searchTerm = e.target.value.toLowerCase();
-  const filteredProducts = products.filter((product) =>
+  const filteredCourses = courses.filter((product) =>
     product.title.toLowerCase().includes(searchTerm)
   );
-  displayProducts(filteredProducts); // Display the filtered products
+  displayCourses(filteredCourses);
 });
 
 // Count Up Functionality
 function countUp(element) {
   const target = parseInt(element.getAttribute("data-target"));
-  const duration = 2000; // Duration in milliseconds
+  const duration = 2000;
   const incrementTime = Math.floor(duration / target);
   let count = 0;
 
@@ -150,7 +148,7 @@ function countUp(element) {
     element.innerText = count;
     if (count >= target) {
       clearInterval(timer);
-      element.innerText = target; // Ensure we end on the target number
+      element.innerText = target;
     }
   }, incrementTime);
 }
@@ -163,7 +161,7 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       countUpElements.forEach((element) => countUp(element));
-      observer.unobserve(entry.target); // Stop observing after count up
+      observer.unobserve(entry.target);
     }
   });
 });
@@ -180,20 +178,19 @@ const prevButton = document.getElementById("prev");
 const nextButton = document.getElementById("next");
 
 function getVisibleSlides() {
-  // Determine how many testimonials to show based on screen size
   const screenWidth = window.innerWidth;
   if (screenWidth >= 1024) {
-    return 3; // Show 3 testimonials per view on large screens
+    return 3;
   } else if (screenWidth >= 768) {
-    return 2; // Show 2 testimonials per view on medium screens
+    return 2;
   } else {
-    return 1; // Show 1 testimonial per view on small screens
+    return 1;
   }
 }
 
 function updateSlidePosition() {
   const visibleSlides = getVisibleSlides();
-  const slideWidth = testimonials[0].clientWidth + 20; // Including margin
+  const slideWidth = testimonials[0].clientWidth + 20;
   track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 }
 
@@ -204,7 +201,7 @@ function moveToNextSlide() {
   if (currentIndex < totalTestimonials - visibleSlides) {
     currentIndex++;
   } else {
-    currentIndex = 0; // Loop back to the beginning
+    currentIndex = 0;
   }
   updateSlidePosition();
 }
@@ -214,7 +211,7 @@ function moveToPrevSlide() {
   if (currentIndex > 0) {
     currentIndex--;
   } else {
-    currentIndex = testimonials.length - visibleSlides; // Loop to the end
+    currentIndex = testimonials.length - visibleSlides;
   }
   updateSlidePosition();
 }
@@ -238,13 +235,13 @@ window.onscroll = function () {
     document.body.scrollTop > 200 ||
     document.documentElement.scrollTop > 200
   ) {
-    scrollToTopBtn.style.display = "block"; // Show the button
+    scrollToTopBtn.style.display = "block";
   } else {
-    scrollToTopBtn.style.display = "none"; // Hide the button
+    scrollToTopBtn.style.display = "none";
   }
 };
 
 // Scroll to the top when the button is clicked
 scrollToTopBtn.addEventListener("click", function () {
-  window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });

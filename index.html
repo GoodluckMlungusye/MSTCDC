@@ -21,42 +21,43 @@
       rel="stylesheet"
     />
     <style>
-      /* Remove underline and text decoration for header links */
       header .logo,
       header .navbar ul li a {
         text-decoration: none;
-        color: white; /* Ensure it uses the parent's color */
+        color: white;
       }
-
-      /* Prevent color change on hover */
       header .navbar ul li a:hover {
-        color: red; /* Maintain the same color on hover */
+        color: red;
       }
-
       header .logo:hover {
-        color: white; /* Maintain the same color on hover */
+        color: white;
       }
-
-      /* You can set a specific color for links if needed */
       header .logo {
-        color: white; /* Example color for the logo */
+        color: white;
+      }
+      .label {
+        color: white;
+      }
+      .departments{
+        margin: 10px 0;
       }
     </style>
   </head>
   <body>
     <!-- Header: Search Bar and Navigation Bar -->
-
     <header>
-      <a href="" class="logo">MS TCDC Learning Center</a>
+      <a href="#" class="logo">MS TCDC Learning Center</a>
 
       <input type="checkbox" id="menu-bar" />
-      <label for="menu-bar">Menu</label>
+      <label for="menu-bar" class="label">Menu</label>
 
       <nav class="navbar">
         <ul>
           <li><a href="#">home</a></li>
-          <li><a href="#">Login</a></li>
-          <li><a href="#">Register</a></li>
+          <li><a href="https://lms.mstcdc.ac.tz/login/index.php">Login</a></li>
+          <li>
+            <a href="https://lms.mstcdc.ac.tz/login/index.php">Register</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -68,8 +69,10 @@
     <section class="hero">
       <div class="hero-content">
         <div class="hero-buttons">
-          <button>Register for free</button>
-          <button>Login</button>
+          <a href="https://lms.mstcdc.ac.tz/login/index.php"
+            >Register for free</a
+          >
+          <a href="https://lms.mstcdc.ac.tz/login/index.php">Login</a>
         </div>
       </div>
       <div class="slider">
@@ -87,21 +90,20 @@
     <section class="stats" id="stats">
       <div class="container">
         <h2 class="stats-title">Engage with our community of learners</h2>
-        <!-- Added Title -->
         <div class="stats-container">
           <div class="stat-column">
             <h2 class="count-up" data-target="100">0</h2>
-            <p>Satisfied Clients</p>
+            <p>Courses</p>
           </div>
           <div class="vertical-line"></div>
           <div class="stat-column">
             <h2 class="count-up" data-target="50">0</h2>
-            <p>Projects Completed</p>
+            <p>Users</p>
           </div>
           <div class="vertical-line"></div>
           <div class="stat-column">
             <h2 class="count-up" data-target="30">0</h2>
-            <p>Team Members</p>
+            <p>Countries</p>
           </div>
         </div>
       </div>
@@ -110,7 +112,7 @@
     <!-- List of Items from API -->
     <section class="items">
       <div class="container">
-        <h2>Our Products</h2>
+        <h2>Our Courses</h2>
 
         <!-- Categories Skeleton -->
         <div id="category-skeleton" class="category-skeletons">
@@ -133,6 +135,10 @@
           <div class="skeleton product-skeleton"></div>
           <div class="skeleton product-skeleton"></div>
           <div class="skeleton product-skeleton"></div>
+          <div class="skeleton product-skeleton"></div>
+          <div class="skeleton product-skeleton"></div>
+          <div class="skeleton product-skeleton"></div>
+          <div class="skeleton product-skeleton"></div>
         </div>
         <div class="item-list" id="item-list">
           <!-- Items will be injected here from the API -->
@@ -144,7 +150,7 @@
     <section id="departments" class="departments">
       <div class="container">
         <div class="section-title">
-          <h2>Departments</h2>
+          <h2>Services</h2>
           <p>
             Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex
             aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos
@@ -161,27 +167,27 @@
                   class="nav-link active show"
                   data-bs-toggle="tab"
                   href="#tab-1"
-                  >Cardiology</a
+                  >Service 1</a
                 >
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#tab-2"
-                  >Neurology</a
+                  >Service 2</a
                 >
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#tab-3"
-                  >Hepatology</a
+                  >Service 3</a
                 >
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#tab-4"
-                  >Pediatrics</a
+                  >Service 4</a
                 >
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#tab-5"
-                  >Eye Care</a
+                  >Service 5</a
                 >
               </li>
             </ul>
@@ -191,7 +197,7 @@
               <div class="tab-pane active show" id="tab-1">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Cardiology</h3>
+                    <h3>Service 1</h3>
                     <p class="fst-italic">
                       Qui laudantium consequatur laborum sit qui ad sapiente
                       dila parde sonata raqer a videna mareta paulona marka
@@ -216,7 +222,7 @@
               <div class="tab-pane" id="tab-2">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Et blanditiis nemo veritatis excepturi</h3>
+                    <h3>Service 2</h3>
                     <p class="fst-italic">
                       Qui laudantium consequatur laborum sit qui ad sapiente
                       dila parde sonata raqer a videna mareta paulona marka
@@ -241,7 +247,7 @@
               <div class="tab-pane" id="tab-3">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
+                    <h3>Service 3</h3>
                     <p class="fst-italic">
                       Eos voluptatibus quo. Odio similique illum id quidem non
                       enim fuga. Qui natus non sunt dicta dolor et. In
@@ -267,10 +273,7 @@
               <div class="tab-pane" id="tab-4">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>
-                      Fuga dolores inventore laboriosam ut est accusamus
-                      laboriosam dolore
-                    </h3>
+                    <h3>Service 4</h3>
                     <p class="fst-italic">
                       Totam aperiam accusamus. Repellat consequuntur iure
                       voluptas iure porro quis delectus
@@ -295,9 +298,7 @@
               <div class="tab-pane" id="tab-5">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>
-                      Est eveniet ipsam sindera pad rone matrelat sando reda
-                    </h3>
+                    <h3>Service 5</h3>
                     <p class="fst-italic">
                       Omnis blanditiis saepe eos autem qui sunt debitis porro
                       quia.
@@ -437,43 +438,45 @@
             <h2 class="footer-title">MS TCDC Learning Center</h2>
             <ul class="contact-details">
               <li>
-                <i class="fas fa-map-marker-alt"></i> 123 Learning St, Education
-                City
+                <i class="fas fa-map-marker-alt"></i>  P.O. Box 254 - Arusha - Tanzania
               </li>
-              <li><i class="fas fa-phone-alt"></i> +1 234 567 890</li>
-              <li><i class="fas fa-envelope"></i> info@mstcdc.com</li>
+              <li><i class="fas fa-phone-alt"></i>  +255 754 651 715</li>
+              <li><i class="fas fa-envelope"></i>  mstcdc@mstcdc.or.tz</li>
             </ul>
           </div>
 
           <!-- Column 2: Links -->
           <div class="footer-column">
-            <h3>Quick Links</h3>
+            <h3>EXPLORE</h3>
             <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">Blog</a></li>
+              <li><a href="https://www.mstcdc.or.tz/learning">Courses</a></li>
+              <li><a href="https://www.mstcdc.or.tz/programs">Programs</a></li>
+              <li><a href="https://www.mstcdc.or.tz/consultancy">Consultancy</a></li>
+              <li><a href="https://www.mstcdc.or.tz/facilities">Facilities</a></li>
+              <li><a href="https://www.mstcdc.or.tz/about">About us</a></li>
             </ul>
           </div>
 
           <!-- Column 3: Other Links -->
           <div class="footer-column">
-            <h3>Resources</h3>
+            <h3>SHORTCUTS</h3>
             <ul>
-              <li><a href="#">FAQ</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms & Conditions</a></li>
-              <li><a href="#">Support</a></li>
+              <li><a href="https://www.mstcdc.or.tz/activity-calendar">Activity Calendar</a></li>
+              <li><a href="https://www.mstcdc.or.tz/about/team">Meet the team</a></li>
+              <li><a href="">Latest</a></li>
+              <li><a href="https://www.mstcdc.or.tz/contact">Contact</a></li>
+              <li><a href="https://www.mstcdc.or.tz/zero-tolerance-on-harrassment">Report Abuse/Harassement 
+              </a></li>
             </ul>
           </div>
 
           <!-- Column 4: Social Media Icons -->
           <div class="footer-column">
-            <h3>Follow Us</h3>
+            <h3>FOLLOW US</h3>
             <div class="social-icons">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-youtube"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.facebook.com/MsTcdc/"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://youtube.com/channel/UCb2jgeGLGxGe-iHeySIXDNA/videos"><i class="fab fa-youtube"></i></a>
+              <a href="https://instagram.com/mstcdc"><i class="fab fa-instagram"></i></a>
             </div>
           </div>
         </div>
