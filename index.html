@@ -5,34 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Company Webpage</title>
     <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Remove underline and text decoration for header links */
+      header .logo,
+      header .navbar ul li a {
+        text-decoration: none;
+        color: white; /* Ensure it uses the parent's color */
+      }
+
+      /* Prevent color change on hover */
+      header .navbar ul li a:hover {
+        color: red; /* Maintain the same color on hover */
+      }
+
+      header .logo:hover {
+        color: white; /* Maintain the same color on hover */
+      }
+
+      /* You can set a specific color for links if needed */
+      header .logo {
+        color: white; /* Example color for the logo */
+      }
+    </style>
   </head>
   <body>
-   <!-- Header: Search Bar and Navigation Bar -->
+    <!-- Header: Search Bar and Navigation Bar -->
 
-   <header>
-    <a href="" class="logo">MS TCDC Learning Center</a>
+    <header>
+      <a href="" class="logo">MS TCDC Learning Center</a>
 
-    <input type="checkbox" id="menu-bar" />
-    <label for="menu-bar">Menu</label>
+      <input type="checkbox" id="menu-bar" />
+      <label for="menu-bar">Menu</label>
 
-    <nav class="navbar">
-      <ul>
-        <li><a href="#">home</a></li>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Register</a></li>
-      </ul>
-    </nav>
-  </header>
-  <div class="search-bar">
-    <input type="text" id="search-input" placeholder="Search products...">
-  </div>  
-
+      <nav class="navbar">
+        <ul>
+          <li><a href="#">home</a></li>
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search products..." />
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
         <div class="hero-buttons">
-          <button>Register</button>
+          <button>Register for free</button>
           <button>Login</button>
         </div>
       </div>
@@ -47,45 +83,410 @@
       </div>
     </section>
 
-<!-- Stats Section -->
-<section class="stats" id="stats">
-    <div class="container">
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+      <div class="container">
+        <h2 class="stats-title">Engage with our community of learners</h2>
+        <!-- Added Title -->
         <div class="stats-container">
-            <div class="stat-column">
-                <h2 class="count-up" data-target="100">0</h2>
-                <p>Satisfied Clients</p>
-            </div>
-            <div class="vertical-line"></div>
-            <div class="stat-column">
-                <h2 class="count-up" data-target="50">0</h2>
-                <p>Projects Completed</p>
-            </div>
-            <div class="vertical-line"></div>
-            <div class="stat-column">
-                <h2 class="count-up" data-target="30">0</h2>
-                <p>Team Members</p>
-            </div>
+          <div class="stat-column">
+            <h2 class="count-up" data-target="100">0</h2>
+            <p>Satisfied Clients</p>
+          </div>
+          <div class="vertical-line"></div>
+          <div class="stat-column">
+            <h2 class="count-up" data-target="50">0</h2>
+            <p>Projects Completed</p>
+          </div>
+          <div class="vertical-line"></div>
+          <div class="stat-column">
+            <h2 class="count-up" data-target="30">0</h2>
+            <p>Team Members</p>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
     <!-- List of Items from API -->
     <section class="items">
       <div class="container">
         <h2>Our Products</h2>
+
+        <!-- Categories Skeleton -->
+        <div id="category-skeleton" class="category-skeletons">
+          <div class="skeleton category-skeleton"></div>
+          <div class="skeleton category-skeleton"></div>
+          <div class="skeleton category-skeleton"></div>
+          <div class="skeleton category-skeleton"></div>
+          <div class="skeleton category-skeleton"></div>
+          <div class="skeleton category-skeleton"></div>
+        </div>
+        <div class="category-buttons" id="category-buttons">
+          <!-- Category buttons will be dynamically inserted here -->
+        </div>
+
+        <!-- Products Skeleton -->
+        <div id="product-skeletons" class="product-skeletons">
+          <div class="skeleton product-skeleton"></div>
+          <div class="skeleton product-skeleton"></div>
+          <div class="skeleton product-skeleton"></div>
+          <div class="skeleton product-skeleton"></div>
+          <div class="skeleton product-skeleton"></div>
+          <div class="skeleton product-skeleton"></div>
+        </div>
         <div class="item-list" id="item-list">
           <!-- Items will be injected here from the API -->
         </div>
       </div>
     </section>
 
+    <!-- ======= Departments Section ======= -->
+    <section id="departments" class="departments">
+      <div class="container">
+        <div class="section-title">
+          <h2>Departments</h2>
+          <p>
+            Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex
+            aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos
+            quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
+            fugiat sit in iste officiis commodi quidem hic quas.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3">
+            <ul class="nav nav-tabs flex-column">
+              <li class="nav-item">
+                <a
+                  class="nav-link active show"
+                  data-bs-toggle="tab"
+                  href="#tab-1"
+                  >Cardiology</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-2"
+                  >Neurology</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-3"
+                  >Hepatology</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-4"
+                  >Pediatrics</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-5"
+                  >Eye Care</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="tab-content">
+              <div class="tab-pane active show" id="tab-1">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Cardiology</h3>
+                    <p class="fst-italic">
+                      Qui laudantium consequatur laborum sit qui ad sapiente
+                      dila parde sonata raqer a videna mareta paulona marka
+                    </p>
+                    <p>
+                      Et nobis maiores eius. Voluptatibus ut enim blanditiis
+                      atque harum sint. Laborum eos ipsum ipsa odit magni.
+                      Incidunt hic ut molestiae aut qui. Est repellat minima
+                      eveniet eius et quis magni nihil. Consequatur dolorem
+                      quaerat quos qui similique accusamus nostrum rem vero
+                    </p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img
+                      src="./assets/testimonials/t1.jpeg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-2">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Et blanditiis nemo veritatis excepturi</h3>
+                    <p class="fst-italic">
+                      Qui laudantium consequatur laborum sit qui ad sapiente
+                      dila parde sonata raqer a videna mareta paulona marka
+                    </p>
+                    <p>
+                      Ea ipsum voluptatem consequatur quis est. Illum error
+                      ullam omnis quia et reiciendis sunt sunt est. Non aliquid
+                      repellendus itaque accusamus eius et velit ipsa
+                      voluptates. Optio nesciunt eaque beatae accusamus lerode
+                      pakto madirna desera vafle de nideran pal
+                    </p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img
+                      src="./assets/testimonials/t2.jpeg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-3">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
+                    <p class="fst-italic">
+                      Eos voluptatibus quo. Odio similique illum id quidem non
+                      enim fuga. Qui natus non sunt dicta dolor et. In
+                      asperiores velit quaerat perferendis aut
+                    </p>
+                    <p>
+                      Iure officiis odit rerum. Harum sequi eum illum corrupti
+                      culpa veritatis quisquam. Neque necessitatibus illo rerum
+                      eum ut. Commodi ipsam minima molestiae sed laboriosam a
+                      iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et
+                      harum voluptatem optio quae
+                    </p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img
+                      src="./assets/testimonials/t3.jpeg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-4">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>
+                      Fuga dolores inventore laboriosam ut est accusamus
+                      laboriosam dolore
+                    </h3>
+                    <p class="fst-italic">
+                      Totam aperiam accusamus. Repellat consequuntur iure
+                      voluptas iure porro quis delectus
+                    </p>
+                    <p>
+                      Eaque consequuntur consequuntur libero expedita in
+                      voluptas. Nostrum ipsam necessitatibus aliquam fugiat
+                      debitis quis velit. Eum ex maxime error in consequatur
+                      corporis atque. Eligendi asperiores sed qui veritatis
+                      aperiam quia a laborum inventore
+                    </p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img
+                      src="./assets/testimonials/t4.jpeg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-5">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>
+                      Est eveniet ipsam sindera pad rone matrelat sando reda
+                    </h3>
+                    <p class="fst-italic">
+                      Omnis blanditiis saepe eos autem qui sunt debitis porro
+                      quia.
+                    </p>
+                    <p>
+                      Exercitationem nostrum omnis. Ut reiciendis repudiandae
+                      minus. Omnis recusandae ut non quam ut quod eius qui.
+                      Ipsum quia odit vero atque qui quibusdam amet. Occaecati
+                      sed est sint aut vitae molestiae voluptate vel
+                    </p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img
+                      src="./assets/testimonials/t5.jpeg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Departments Section -->
+
+    <!-- Testimonials Section with Slider -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial-slider" id="testimonial-slider">
+          <div class="testimonial-track">
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "MS TCDC Learning Center has transformed my learning experience.
+                I can't recommend it enough."
+              </p>
+              <div class="client-info">
+                <img
+                  src="./assets/testimonials/t1.jpeg"
+                  alt="Client 1"
+                  class="client-photo"
+                />
+                <div>
+                  <h4>John Doe</h4>
+                  <p>Business Analyst</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "Amazing platform! I've gained so much knowledge and confidence
+                in my field."
+              </p>
+              <div class="client-info">
+                <img
+                  src="./assets/testimonials/t2.jpeg"
+                  alt="Client 2"
+                  class="client-photo"
+                />
+                <div>
+                  <h4>Jane Smith</h4>
+                  <p>Marketing Manager</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "Highly recommend MS TCDC Learning Center. The staff and
+                instructors are excellent!"
+              </p>
+              <div class="client-info">
+                <img
+                  src="./assets/testimonials/t3.jpeg"
+                  alt="Client 3"
+                  class="client-photo"
+                />
+                <div>
+                  <h4>Sam Wilson</h4>
+                  <p>Software Developer</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "Incredible learning environment and superb support! Helped me
+                grow in my career."
+              </p>
+              <div class="client-info">
+                <img
+                  src="./assets/testimonials/t4.jpeg"
+                  alt="Client 4"
+                  class="client-photo"
+                />
+                <div>
+                  <h4>Alice Brown</h4>
+                  <p>HR Specialist</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                "The courses are well-structured, and the instructors are highly
+                professional."
+              </p>
+              <div class="client-info">
+                <img
+                  src="./assets/testimonials/t5.jpeg"
+                  alt="Client 5"
+                  class="client-photo"
+                />
+                <div>
+                  <h4>Michael Lee</h4>
+                  <p>Data Scientist</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Navigation buttons -->
+        <button class="slider-button prev" id="prev">&#10094;</button>
+        <button class="slider-button next" id="next">&#10095;</button>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
-        <p>&copy; 2024 Company Name. All rights reserved.</p>
+        <div class="footer-columns">
+          <!-- Column 1: Company Info -->
+          <div class="footer-column">
+            <h2 class="footer-title">MS TCDC Learning Center</h2>
+            <ul class="contact-details">
+              <li>
+                <i class="fas fa-map-marker-alt"></i> 123 Learning St, Education
+                City
+              </li>
+              <li><i class="fas fa-phone-alt"></i> +1 234 567 890</li>
+              <li><i class="fas fa-envelope"></i> info@mstcdc.com</li>
+            </ul>
+          </div>
+
+          <!-- Column 2: Links -->
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Other Links -->
+          <div class="footer-column">
+            <h3>Resources</h3>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms & Conditions</a></li>
+              <li><a href="#">Support</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Social Media Icons -->
+          <div class="footer-column">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="scroll-to-top" style="display: none">
+      ↑
+    </button>
 
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
