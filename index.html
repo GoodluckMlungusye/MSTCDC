@@ -86,28 +86,34 @@
       </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats" id="stats">
-      <div class="container">
-        <h2 class="stats-title">Engage with our community of learners</h2>
-        <div class="stats-container">
-          <div class="stat-column">
-            <h2 class="count-up" data-target="100">0</h2>
-            <p>Courses</p>
-          </div>
-          <div class="vertical-line"></div>
-          <div class="stat-column">
-            <h2 class="count-up" data-target="50">0</h2>
-            <p>Users</p>
-          </div>
-          <div class="vertical-line"></div>
-          <div class="stat-column">
-            <h2 class="count-up" data-target="30">0</h2>
-            <p>Countries</p>
-          </div>
-        </div>
+<!-- Stats Section -->
+<section class="stats" id="stats">
+  <div class="container">
+    <h2 class="stats-title">Engage with our community of learners</h2>
+    <div class="stats-container">
+      <!-- Courses -->
+      <div class="stat-column">
+        <h2 class="count-up" id="courses-count" data-target="0">0</h2>
+        <p>Courses</p>
       </div>
-    </section>
+      <div class="vertical-line"></div>
+
+      <!-- Users -->
+      <div class="stat-column">
+        <h2 class="count-up" id="users-count" data-target="0">0</h2>
+        <p>Learners</p>
+      </div>
+      <div class="vertical-line"></div>
+
+      <!-- Countries -->
+      <div class="stat-column">
+        <h2 class="count-up" id="countries-count" data-target="0">0</h2>
+        <p>Countries</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <!-- List of Items from API -->
     <section class="items">
@@ -197,7 +203,7 @@
               <div class="tab-pane active show" id="tab-1">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Service 1</h3>
+                    <h3>Digital Learning</h3>
                     <p class="fst-italic">
                       Qui laudantium consequatur laborum sit qui ad sapiente
                       dila parde sonata raqer a videna mareta paulona marka

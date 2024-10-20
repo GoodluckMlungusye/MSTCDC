@@ -1,3 +1,16 @@
+// Define constants for Users and Countries
+const TOTAL_USERS = 200;
+const TOTAL_COUNTRIES = 178;
+
+// Get elements to update their data-targets
+const coursesCountElement = document.getElementById("courses-count");
+const usersCountElement = document.getElementById("users-count");
+const countriesCountElement = document.getElementById("countries-count");
+
+// Set Users and Countries data-targets from constants
+usersCountElement.setAttribute("data-target", TOTAL_USERS);
+countriesCountElement.setAttribute("data-target", TOTAL_COUNTRIES);
+
 // Toggle Hamburger Menu on Mobile
 function toggleMenu() {
   const navMenu = document.getElementById("nav-menu");
@@ -33,30 +46,65 @@ const itemList = document.getElementById("item-list");
 const categoryButtonsContainer = document.getElementById("category-buttons");
 const categorySkeletons = document.getElementById("category-skeleton");
 const productSkeletons = document.getElementById("product-skeletons");
-let courses = [];
+let allCourses = [];
+let coursesWithDate = [];
 let categories = [];
 
 // Show skeletons while fetching data
 categorySkeletons.style.display = "flex";
 productSkeletons.style.display = "flex";
 
-// Fetch all courses
-fetch("https://fakestoreapi.com/products")
+// Fetch all courses from the old API
+fetch("https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_search_courses&moodlewsrestformat=json&criterianame=search&criteriavalue=")
   .then((response) => response.json())
   .then((data) => {
-    courses = data;
-    displayCourses(courses);
+    allCourses = data.courses; 
+    const totalCourses = data.total; 
+    coursesCountElement.setAttribute("data-target", totalCourses); 
+    countUpElements.forEach((element) => countUp(element)); 
+    displayCourses(allCourses); 
     productSkeletons.style.display = "none";
   })
-  .catch((error) => console.error("Error fetching the API:", error));
+  .catch((error) => console.error("Error fetching the courses API:", error));
 
-// Fetch categories and display category buttons
-fetch("https://fakestoreapi.com/products/categories")
+// Fetch courses with timecreated from the new API
+fetch("https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_get_courses&moodlewsrestformat=json")
   .then((response) => response.json())
   .then((data) => {
-    categories = data;
-    createCategoryButtons(categories);
-    categorySkeletons.style.display = "none";
+    const coursesWithTimeCreated = data; // Get courses with timecreated
+
+    // Create a map for timecreated based on course ID
+    const timeCreatedMap = {};
+    coursesWithTimeCreated.forEach(course => {
+      timeCreatedMap[course.id] = course.timecreated;
+    });
+
+    // Merge timecreated into allCourses
+    coursesWithDate = allCourses.map(course => {
+      return {
+        ...course,
+        timecreated: timeCreatedMap[course.id] || null // Add timecreated if available
+      };
+    });
+
+    // Sort courses by timecreated (latest first)
+    coursesWithDate.sort((a, b) => {
+      return (b.timecreated || 0) - (a.timecreated || 0); // Handle null cases
+    });
+
+    // Display merged courses
+    displayCourses(coursesWithDate); 
+    productSkeletons.style.display = "none"; 
+  })
+  .catch((error) => console.error("Error fetching courses with timecreated:", error));
+
+// Fetch categories and display category buttons
+fetch("https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_get_categories&moodlewsrestformat=json")
+  .then((response) => response.json())
+  .then((data) => {
+    categories = data; 
+    createCategoryButtons(categories); 
+    categorySkeletons.style.display = "none"; 
   })
   .catch((error) => console.error("Error fetching categories:", error));
 
@@ -65,62 +113,73 @@ function createCategoryButtons(categories) {
   const allButton = document.createElement("button");
   allButton.textContent = "All";
   allButton.classList.add("active");
-  allButton.addEventListener("click", () => filterProductsByCategory("all"));
+
+  allButton.addEventListener("click", () => {
+    displayCourses(coursesWithDate); 
+    updateActiveButton(allButton); 
+  });
+
   categoryButtonsContainer.appendChild(allButton);
 
   categories.forEach((category) => {
     const categoryButton = document.createElement("button");
     categoryButton.textContent =
-      category.charAt(0).toUpperCase() + category.slice(1);
-    categoryButton.addEventListener("click", () =>
-      filterProductsByCategory(category)
-    );
+      category.name.charAt(0).toUpperCase() + category.name.slice(1);
+    
+    categoryButton.addEventListener("click", () => {
+      filterCoursesByCategory(category.id);
+      updateActiveButton(categoryButton); 
+    });
+
     categoryButtonsContainer.appendChild(categoryButton);
   });
 }
 
-// Function to filter courses by category
-function filterProductsByCategory(category) {
-  const allButtons = document.querySelectorAll(".category-buttons button");
-  allButtons.forEach((button) => button.classList.remove("active"));
+// Function to update the active button state
+function updateActiveButton(activeButton) {
+  const buttons = document.querySelectorAll(".category-buttons button");
+  buttons.forEach((button) => {
+    button.classList.remove("active");
+  });
 
   // Add 'active' class to the clicked button
-  const clickedButton = Array.from(allButtons).find(
-    (button) =>
-      button.textContent.toLowerCase() === category.toLowerCase() ||
-      (category === "all" && button.textContent === "All")
-  );
-  clickedButton.classList.add("active");
+  activeButton.classList.add("active");
+}
 
-  if (category === "all") {
-    displayCourses(courses);
-  } else {
-    productSkeletons.style.display = "flex";
-    fetch(`https://fakestoreapi.com/products/category/${category}`)
-      .then((response) => response.json())
-      .then((data) => {
-        displayCourses(data);
-        productSkeletons.style.display = "none";
-      })
-      .catch((error) =>
-        console.error("Error fetching products by category:", error)
-      );
-  }
+// Function to filter courses by category ID
+function filterCoursesByCategory(categoryId) {
+  const filteredCourses = coursesWithDate.filter(course => course.categoryid === categoryId);
+  displayCourses(filteredCourses); // Display filtered courses
 }
 
 // Function to display courses
 function displayCourses(items) {
-  itemList.innerHTML = "";
+  itemList.innerHTML = ""; 
+  if (items.length === 0) {
+    itemList.innerHTML = "<p>No courses found in this category.</p>";
+    return;
+  }
+
   items.forEach((item) => {
     const itemCard = document.createElement("div");
     itemCard.classList.add("item-card");
 
+    // Check if the course image is available, if not use a default image
+    const courseImage = item.courseimage ? item.courseimage : 'assets/default.jpg';
+
+    // Format the created date
+    const createdDate = item.timecreated ? new Date(item.timecreated * 1000).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }) : 'Unknown';
+
     itemCard.innerHTML = `
-            <img src="${item.image}" alt="${item.title}">
-            <h5>${item.title}</h5>
-            <p>Added on: 12th Jan 2024</p>
-            <button>Read More</button>
-        `;
+      <img src="${courseImage}" alt="${item.displayname}">
+      <h5>${item.displayname}</h5>
+      <p>Added on: ${createdDate}</p> <!-- Use timecreated here -->
+      <button onclick="location.href='https://lms.mstcdc.ac.tz/course/view.php?id=${item.id}'">Read More</button>
+    `;
     itemList.appendChild(itemCard);
   });
 }
@@ -130,8 +189,8 @@ const searchInput = document.getElementById("search-input");
 
 searchInput.addEventListener("input", function (e) {
   const searchTerm = e.target.value.toLowerCase();
-  const filteredCourses = courses.filter((product) =>
-    product.title.toLowerCase().includes(searchTerm)
+  const filteredCourses = coursesWithDate.filter((course) =>
+    course.title.toLowerCase().includes(searchTerm)
   );
   displayCourses(filteredCourses);
 });

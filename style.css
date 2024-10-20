@@ -292,8 +292,6 @@ header label {
     }
 }
 
-
-
 /* Items Section */
 .items {
     padding: 50px 0;
@@ -312,6 +310,7 @@ header label {
     border: 1px solid #ddd;
     padding: 20px;
     border-radius: 8px;
+    text-align: left;
 }
 
 .item-card img {
@@ -321,8 +320,15 @@ header label {
     border-radius: 8px;
 }
 
-.item-card h3 {
+/* Truncate long course names */
+.item-card h5 {
     margin-top: 10px;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    font-weight: bold;
 }
 
 .item-card p {
@@ -343,6 +349,7 @@ header label {
     color: red;
     border: 1px solid red;
 }
+
 
 /* Testimonials Section */
 .testimonials {
@@ -443,7 +450,6 @@ header label {
 @media (max-width: 1024px) {
     .testimonial-card {
         flex: 1 0 50%;
-        /* 50% width for medium screens */
     }
 }
 
