@@ -2,6 +2,40 @@
 const TOTAL_USERS = 200;
 const TOTAL_COUNTRIES = 178;
 
+// Testimonials array
+const testimonialsData = [
+  {
+    text: "MS TCDC Learning Center has transformed my learning experience. I can't recommend it enough.",
+    name: "John Doe",
+    jobTitle: "Business Analyst",
+    image: "./assets/testimonials/t1.jpeg",
+  },
+  {
+    text: "Amazing platform! I've gained so much knowledge and confidence in my field.",
+    name: "Jane Smith",
+    jobTitle: "Marketing Manager",
+    image: "./assets/testimonials/t2.jpeg",
+  },
+  {
+    text: "Highly recommend MS TCDC Learning Center. The staff and instructors are excellent!",
+    name: "Sam Wilson",
+    jobTitle: "Software Developer",
+    image: "./assets/testimonials/t3.jpeg",
+  },
+  {
+    text: "Incredible learning environment and superb support! Helped me grow in my career.",
+    name: "Alice Brown",
+    jobTitle: "HR Specialist",
+    image: "./assets/testimonials/t4.jpeg",
+  },
+  {
+    text: "The courses are well-structured, and the instructors are highly professional.",
+    name: "Michael Lee",
+    jobTitle: "Data Scientist",
+    image: "./assets/testimonials/t5.jpeg",
+  },
+];
+
 // Get elements to update their data-targets
 const coursesCountElement = document.getElementById("courses-count");
 const usersCountElement = document.getElementById("users-count");
@@ -54,59 +88,62 @@ let categories = [];
 categorySkeletons.style.display = "flex";
 productSkeletons.style.display = "flex";
 
-// Fetch all courses from the old API
-fetch("https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_search_courses&moodlewsrestformat=json&criterianame=search&criteriavalue=")
-  .then((response) => response.json())
-  .then((data) => {
-    allCourses = data.courses; 
-    const totalCourses = data.total; 
-    coursesCountElement.setAttribute("data-target", totalCourses); 
-    countUpElements.forEach((element) => countUp(element)); 
-    displayCourses(allCourses); 
-    productSkeletons.style.display = "none";
-  })
-  .catch((error) => console.error("Error fetching the courses API:", error));
+// Function to display the courses once all data is fetched
+function loadCoursesAndCategories() {
+  // Fetch all courses and categories using Promise.all to synchronize the data fetching
+  Promise.all([
+    // Fetch courses from the old API
+    fetch(
+      "https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_search_courses&moodlewsrestformat=json&criterianame=search&criteriavalue="
+    ).then((response) => response.json()),
 
-// Fetch courses with timecreated from the new API
-fetch("https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_get_courses&moodlewsrestformat=json")
-  .then((response) => response.json())
-  .then((data) => {
-    const coursesWithTimeCreated = data; // Get courses with timecreated
+    // Fetch courses with timecreated from the new API
+    fetch(
+      "https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_get_courses&moodlewsrestformat=json"
+    ).then((response) => response.json()),
 
-    // Create a map for timecreated based on course ID
-    const timeCreatedMap = {};
-    coursesWithTimeCreated.forEach(course => {
-      timeCreatedMap[course.id] = course.timecreated;
-    });
+    // Fetch categories
+    fetch(
+      "https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_get_categories&moodlewsrestformat=json"
+    ).then((response) => response.json()),
+  ])
+    .then(([oldCoursesData, coursesWithTimeCreated, categoriesData]) => {
+      // Process old courses
+      allCourses = oldCoursesData.courses;
+      const totalCourses = oldCoursesData.total;
+      coursesCountElement.setAttribute("data-target", totalCourses);
+      countUpElements.forEach((element) => countUp(element));
 
-    // Merge timecreated into allCourses
-    coursesWithDate = allCourses.map(course => {
-      return {
+      // Process courses with timecreated
+      const timeCreatedMap = {};
+      coursesWithTimeCreated.forEach((course) => {
+        timeCreatedMap[course.id] = course.timecreated;
+      });
+
+      // Merge timecreated into allCourses
+      coursesWithDate = allCourses.map((course) => ({
         ...course,
-        timecreated: timeCreatedMap[course.id] || null // Add timecreated if available
-      };
+        timecreated: timeCreatedMap[course.id] || null,
+      }));
+
+      // Sort courses by timecreated (latest first)
+      coursesWithDate.sort(
+        (a, b) => (b.timecreated || 0) - (a.timecreated || 0)
+      );
+
+      // Process categories
+      categories = categoriesData;
+
+      // Display categories and courses now that everything is loaded
+      createCategoryButtons(categories);
+      displayCourses(coursesWithDate);
+      categorySkeletons.style.display = "none";
+      productSkeletons.style.display = "none";
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
     });
-
-    // Sort courses by timecreated (latest first)
-    coursesWithDate.sort((a, b) => {
-      return (b.timecreated || 0) - (a.timecreated || 0); // Handle null cases
-    });
-
-    // Display merged courses
-    displayCourses(coursesWithDate); 
-    productSkeletons.style.display = "none"; 
-  })
-  .catch((error) => console.error("Error fetching courses with timecreated:", error));
-
-// Fetch categories and display category buttons
-fetch("https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_get_categories&moodlewsrestformat=json")
-  .then((response) => response.json())
-  .then((data) => {
-    categories = data; 
-    createCategoryButtons(categories); 
-    categorySkeletons.style.display = "none"; 
-  })
-  .catch((error) => console.error("Error fetching categories:", error));
+}
 
 // Function to create category buttons
 function createCategoryButtons(categories) {
@@ -115,8 +152,8 @@ function createCategoryButtons(categories) {
   allButton.classList.add("active");
 
   allButton.addEventListener("click", () => {
-    displayCourses(coursesWithDate); 
-    updateActiveButton(allButton); 
+    displayCourses(coursesWithDate);
+    updateActiveButton(allButton);
   });
 
   categoryButtonsContainer.appendChild(allButton);
@@ -125,10 +162,10 @@ function createCategoryButtons(categories) {
     const categoryButton = document.createElement("button");
     categoryButton.textContent =
       category.name.charAt(0).toUpperCase() + category.name.slice(1);
-    
+
     categoryButton.addEventListener("click", () => {
       filterCoursesByCategory(category.id);
-      updateActiveButton(categoryButton); 
+      updateActiveButton(categoryButton);
     });
 
     categoryButtonsContainer.appendChild(categoryButton);
@@ -148,13 +185,15 @@ function updateActiveButton(activeButton) {
 
 // Function to filter courses by category ID
 function filterCoursesByCategory(categoryId) {
-  const filteredCourses = coursesWithDate.filter(course => course.categoryid === categoryId);
-  displayCourses(filteredCourses); // Display filtered courses
+  const filteredCourses = coursesWithDate.filter(
+    (course) => course.categoryid === categoryId
+  );
+  displayCourses(filteredCourses); 
 }
 
 // Function to display courses
 function displayCourses(items) {
-  itemList.innerHTML = ""; 
+  itemList.innerHTML = "";
   if (items.length === 0) {
     itemList.innerHTML = "<p>No courses found in this category.</p>";
     return;
@@ -165,14 +204,18 @@ function displayCourses(items) {
     itemCard.classList.add("item-card");
 
     // Check if the course image is available, if not use a default image
-    const courseImage = item.courseimage ? item.courseimage : 'assets/default.jpg';
+    const courseImage = item.courseimage
+      ? item.courseimage
+      : "assets/default.jpg";
 
     // Format the created date
-    const createdDate = item.timecreated ? new Date(item.timecreated * 1000).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }) : 'Unknown';
+    const createdDate = item.timecreated
+      ? new Date(item.timecreated * 1000).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      : "Unknown";
 
     itemCard.innerHTML = `
       <img src="${courseImage}" alt="${item.displayname}">
@@ -184,16 +227,8 @@ function displayCourses(items) {
   });
 }
 
-// Search bar functionality
-const searchInput = document.getElementById("search-input");
-
-searchInput.addEventListener("input", function (e) {
-  const searchTerm = e.target.value.toLowerCase();
-  const filteredCourses = coursesWithDate.filter((course) =>
-    course.title.toLowerCase().includes(searchTerm)
-  );
-  displayCourses(filteredCourses);
-});
+// Load all courses and categories once the page is ready
+document.addEventListener("DOMContentLoaded", loadCoursesAndCategories);
 
 // Count Up Functionality
 function countUp(element) {
@@ -227,6 +262,34 @@ const observer = new IntersectionObserver((entries) => {
 
 observer.observe(statsSection);
 
+// Function to display testimonials dynamically
+function displayTestimonials(testimonials) {
+  const testimonialTrack = document.querySelector(".testimonial-track");
+
+  testimonialTrack.innerHTML = "";
+
+  testimonials.forEach((testimonial) => {
+    const testimonialCard = document.createElement("div");
+    testimonialCard.classList.add("testimonial-card");
+
+    testimonialCard.innerHTML = `
+      <p class="testimonial-text">"${testimonial.text}"</p>
+      <div class="client-info">
+        <img src="${testimonial.image}" alt="${testimonial.name}" class="client-photo" />
+        <div>
+          <h4>${testimonial.name}</h4>
+          <p>${testimonial.jobTitle}</p>
+        </div>
+      </div>
+    `;
+
+    testimonialTrack.appendChild(testimonialCard);
+  });
+}
+
+// Call function to display testimonials
+displayTestimonials(testimonialsData);
+
 // Sliding Testimonials
 let currentIndex = 0;
 const track = document
@@ -249,13 +312,14 @@ function getVisibleSlides() {
 
 function updateSlidePosition() {
   const visibleSlides = getVisibleSlides();
-  const slideWidth = testimonials[0].clientWidth + 20;
+  const slideWidth =
+    document.querySelector(".testimonial-card").clientWidth + 20;
   track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 }
 
 function moveToNextSlide() {
   const visibleSlides = getVisibleSlides();
-  const totalTestimonials = testimonials.length;
+  const totalTestimonials = testimonialsData.length;
 
   if (currentIndex < totalTestimonials - visibleSlides) {
     currentIndex++;
@@ -270,7 +334,7 @@ function moveToPrevSlide() {
   if (currentIndex > 0) {
     currentIndex--;
   } else {
-    currentIndex = testimonials.length - visibleSlides;
+    currentIndex = testimonialsData.length - visibleSlides;
   }
   updateSlidePosition();
 }
