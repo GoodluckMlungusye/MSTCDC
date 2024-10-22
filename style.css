@@ -33,7 +33,7 @@ header {
 
 header .logo {
     font-weight: bolder;
-    font-size: 25px;
+    font-size: 20px;
     color: white;
 }
 
@@ -43,8 +43,10 @@ header .navbar ul li {
 }
 
 header .navbar ul li a {
-    font-size: 20px;
-    padding: 20px;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
     color: white;
     display: block;
 }
@@ -135,7 +137,7 @@ header label {
 /* Hero Section */
 .hero {
     position: relative;
-    height: 80vh;
+    height: 60vh;
     overflow: hidden;
 }
 
@@ -151,6 +153,10 @@ header label {
 .hero-content h2 {
     font-size: 48px;
     margin-bottom: 20px;
+}
+
+.hero-buttons {
+    margin-top: 200px;
 }
 
 .hero-buttons a {
@@ -306,6 +312,7 @@ header label {
 }
 
 .item-card {
+    position: relative;
     width: 300px;
     border: 1px solid #ddd;
     padding: 20px;
@@ -337,19 +344,29 @@ header label {
 
 .item-card button {
     padding: 5px 20px;
-    background-color: red;
-    color: #fff;
+    background-color: #C2FFE0;
+    color: black;
     border: none;
     cursor: pointer;
     border-radius: 5px;
 }
 
-.item-card button:hover {
-    background-color: white;
-    color: red;
-    border: 1px solid red;
-}
 
+/* Badge for new courses */
+.new-badge {
+    position: absolute;
+    top: 15px;
+    left: -3px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 3px;
+    z-index: 1;
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+}
 
 /* Testimonials Section */
 .testimonials {
@@ -524,12 +541,11 @@ header label {
 .newsletter-subscription h2 {
     font-size: 24px;
     margin-bottom: 20px;
-    text-transform: uppercase;
 }
 
 .subscribe-btn {
-    background-color:white;
-    color: red;
+    background-color: #C2FFE0;
+    color: black;
     border: none;
     padding: 15px 30px;
     font-size: 18px;
@@ -541,8 +557,7 @@ header label {
 }
 
 .subscribe-btn:hover {
-    letter-spacing: 1px;
-    color: red;
+    color: black;
 }
 
 /* Responsive Design */

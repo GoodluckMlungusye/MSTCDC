@@ -1,6 +1,6 @@
 // Define constants for Users and Countries
 const TOTAL_USERS = 200;
-const TOTAL_COUNTRIES = 178;
+const TOTAL_COUNTRIES = 126;
 
 // Testimonials array
 const testimonialsData = [
@@ -199,6 +199,8 @@ function displayCourses(items) {
     return;
   }
 
+  const january2024 = new Date('2024-01-01').getTime() / 1000; // Timestamp for January 1, 2024
+
   items.forEach((item) => {
     const itemCard = document.createElement("div");
     itemCard.classList.add("item-card");
@@ -217,15 +219,25 @@ function displayCourses(items) {
         })
       : "Unknown";
 
+    // Check if the course is "new" (added from January 2024 onwards)
+    const isNew = item.timecreated >= january2024;
+
+    // Construct the HTML for the course item
     itemCard.innerHTML = `
+      ${isNew ? '<div class="new-badge">NEW</div>' : ''}
       <img src="${courseImage}" alt="${item.displayname}">
       <h5>${item.displayname}</h5>
       <p>Added on: ${createdDate}</p> <!-- Use timecreated here -->
       <button onclick="location.href='https://lms.mstcdc.ac.tz/course/view.php?id=${item.id}'">Read More</button>
     `;
+
     itemList.appendChild(itemCard);
   });
 }
+
+
+
+
 
 // Load all courses and categories once the page is ready
 document.addEventListener("DOMContentLoaded", loadCoursesAndCategories);
