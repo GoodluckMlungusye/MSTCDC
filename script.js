@@ -36,6 +36,15 @@ const testimonialsData = [
   },
 ];
 
+// Define featured categories and the number of courses to display for each
+const featuredCategories = {
+  "Master of Leadership and Governance": 4,
+  "SPA II Programmes": 2,
+  "BA in Leadership and Governance": 2,
+  "GIZ EnACT Program": 5,
+  "Professional Courses": 2,
+};
+
 // Get elements to update their data-targets
 const coursesCountElement = document.getElementById("courses-count");
 const usersCountElement = document.getElementById("users-count");
@@ -134,9 +143,9 @@ function loadCoursesAndCategories() {
       // Process categories
       categories = categoriesData;
 
-      // Display categories and courses now that everything is loaded
+      // Display featured courses by category
       createCategoryButtons(categories);
-      displayCourses(coursesWithDate);
+      displayCourses(getFeaturedCourses());
       categorySkeletons.style.display = "none";
       productSkeletons.style.display = "none";
     })
@@ -145,18 +154,44 @@ function loadCoursesAndCategories() {
     });
 }
 
+// Function to get featured courses by category and random selection
+function getFeaturedCourses() {
+  let featuredCourses = [];
+
+  // Loop through each featured category and pick random courses
+  for (const [categoryName, count] of Object.entries(featuredCategories)) {
+    // Find the category ID for the current category name
+    const category = categories.find((cat) => cat.name === categoryName);
+
+    if (category) {
+      // Filter courses in this category
+      const coursesInCategory = coursesWithDate.filter(
+        (course) => course.categoryid === category.id
+      );
+
+      // Randomly select the specified number of courses
+      const selectedCourses = coursesInCategory
+        .sort(() => 0.5 - Math.random()) // Shuffle the array randomly
+        .slice(0, count); // Take the required number of courses
+
+      featuredCourses = featuredCourses.concat(selectedCourses);
+    }
+  }
+  return featuredCourses;
+}
+
 // Function to create category buttons
 function createCategoryButtons(categories) {
-  const allButton = document.createElement("button");
-  allButton.textContent = "All";
-  allButton.classList.add("active");
+  const featuredButton = document.createElement("button");
+  featuredButton.textContent = "Featured Courses";
+  featuredButton.classList.add("active");
 
-  allButton.addEventListener("click", () => {
-    displayCourses(coursesWithDate);
-    updateActiveButton(allButton);
+  featuredButton.addEventListener("click", () => {
+    displayCourses(getFeaturedCourses());
+    updateActiveButton(featuredButton);
   });
 
-  categoryButtonsContainer.appendChild(allButton);
+  categoryButtonsContainer.appendChild(featuredButton);
 
   categories.forEach((category) => {
     const categoryButton = document.createElement("button");
@@ -188,7 +223,7 @@ function filterCoursesByCategory(categoryId) {
   const filteredCourses = coursesWithDate.filter(
     (course) => course.categoryid === categoryId
   );
-  displayCourses(filteredCourses); 
+  displayCourses(filteredCourses);
 }
 
 // Function to display courses
@@ -199,7 +234,7 @@ function displayCourses(items) {
     return;
   }
 
-  const january2024 = new Date('2024-01-01').getTime() / 1000; // Timestamp for January 1, 2024
+  const january2024 = new Date("2024-01-01").getTime() / 1000; // Timestamp for January 1, 2024
 
   items.forEach((item) => {
     const itemCard = document.createElement("div");
@@ -224,20 +259,14 @@ function displayCourses(items) {
 
     // Construct the HTML for the course item
     itemCard.innerHTML = `
-      ${isNew ? '<div class="new-badge">NEW</div>' : ''}
-      <img src="${courseImage}" alt="${item.displayname}">
-      <h5>${item.displayname}</h5>
-      <p>Added on: ${createdDate}</p> <!-- Use timecreated here -->
-      <button onclick="location.href='https://lms.mstcdc.ac.tz/course/view.php?id=${item.id}'">Read More</button>
+      ${isNew ? '<div class="new-badge">New</div>' : ""}
+      <img src="${courseImage}" alt="${item.fullname}">
+      <h3>${item.fullname}</h3>
+      <p class="created-date">Added on ${createdDate}</p>
     `;
-
     itemList.appendChild(itemCard);
   });
 }
-
-
-
-
 
 // Load all courses and categories once the page is ready
 document.addEventListener("DOMContentLoaded", loadCoursesAndCategories);
@@ -273,6 +302,23 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 observer.observe(statsSection);
+
+// Function to display video section
+document.addEventListener("DOMContentLoaded", function () {
+  const iframe = document.getElementById("videoIframe");
+  const videoUrl = iframe.getAttribute("data-video-url");
+  function getEmbedUrl(url) {
+    const urlObj = new URL(url);
+    let videoId = "";
+    if (urlObj.hostname.includes("youtu.be")) {
+      videoId = urlObj.pathname.slice(1);
+    } else if (urlObj.hostname.includes("youtube.com")) {
+      videoId = urlObj.searchParams.get("v");
+    }
+    return `https://www.youtube.com/embed/${videoId}`;
+  }
+  iframe.src = getEmbedUrl(videoUrl);
+});
 
 // Function to display testimonials dynamically
 function displayTestimonials(testimonials) {

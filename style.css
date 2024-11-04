@@ -22,7 +22,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    background: red;
+    background: #ed1c24;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     padding: 0px 7%;
     display: flex;
@@ -53,14 +53,14 @@ header .navbar ul li a {
 
 header .navbar ul li a:hover {
     background: white;
-    color: red;
+    color: #ed1c24;
 }
 
 header .navbar ul li ul {
     position: absolute;
     left: 0;
     width: 200px;
-    background: red;
+    background: #ed1c24;
     display: none;
 }
 
@@ -108,7 +108,7 @@ header label {
         top: 100%;
         left: 0;
         right: 0;
-        background: red;
+        background: #ed1c24;
         border-top: 1px solid rgba(0, 0, 0, 0.1);
         display: none;
     }
@@ -162,7 +162,7 @@ header label {
 .hero-buttons a {
     padding: 10px 20px;
     margin-right: 10px;
-    background-color: red;
+    background-color: #ed1c24;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -176,7 +176,7 @@ header label {
 
 .hero-buttons a:hover {
     background-color: white;
-    color: red;
+    color: #ed1c24;
 }
 
 /* Slider */
@@ -223,7 +223,7 @@ header label {
 .stat-column h2 {
     font-size: 40px;
     margin-bottom: 10px;
-    color: red;
+    color: #ed1c24;
     font-weight: bolder;
 }
 
@@ -281,12 +281,12 @@ header label {
 }
 
 .category-buttons button.active {
-    background-color: red;
+    background-color: #ed1c24;
     color: #fff;
 }
 
 .category-buttons button:hover {
-    background-color: red;
+    background-color: #ed1c24;
     color: #fff;
 }
 
@@ -357,7 +357,7 @@ header label {
     position: absolute;
     top: 15px;
     left: -3px;
-    background-color: red;
+    background-color: #ed1c24;
     color: white;
     padding: 5px 10px;
     font-size: 12px;
@@ -366,6 +366,67 @@ header label {
     border-radius: 3px;
     z-index: 1;
     clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+}
+
+/* Video Section */
+
+.video {
+
+    font-family: Arial, sans-serif;
+    background-color: #ed1c24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+
+}
+
+.video-section {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+}
+
+.video-title {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.video-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-container:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .video-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-section {
+        padding: 10px;
+    }
 }
 
 /* Testimonials Section */
@@ -444,7 +505,7 @@ header label {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: red;
+    background-color: #ed1c24;
     color: #fff;
     border: none;
     padding: 10px;
@@ -477,10 +538,102 @@ header label {
     }
 }
 
+/* Mobile App Section */
+
+.mobile {
+    display: flex;
+    align-items: center;
+    background: #505050;
+    padding: 50px 90px;
+    justify-content: space-around;
+}
+
+.owner {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 0 10px;
+}
+
+.owner span {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.mobile-block {
+    display: flex;
+    align-items: center;
+}
+
+.mobile-block img {
+    height: 40px;
+    margin: 0 5px;
+}
+
+.mobile-desc {
+    padding: 0 10px;
+}
+
+
+.mobile-desc span {
+    font-size: 20px;
+    color: white;
+    font-weight: lighter;
+}
+
+@media (max-width: 1222px) {
+
+    .mobile {
+        padding: 10px 0px;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .owner {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 0;
+    }
+
+
+    .mobile-block {
+        margin-top: 20px;
+    }
+
+}
+
+@media (max-width: 991px) {
+
+    .owner span {
+        font-size: 20px;
+    }
+
+    .mobile-desc span {
+        font-size: 18px;
+    }
+
+}
+
+@media (max-width: 572px) {
+
+    .owner span {
+        font-size: 18px;
+    }
+
+    .mobile-desc span {
+        font-size: 15px;
+    }
+
+    .mobile-block img {
+        height: 30px;
+    }
+
+}
 
 /* Contact Us Section */
 .contact-section {
-    background-color: red; 
+    background-color: #ed1c24;
     padding: 50px 0;
 }
 
@@ -533,9 +686,9 @@ header label {
     flex: 1;
     text-align: center;
     padding: 40px 20px;
-    background-color: red;
-    color:white;
-    border-radius: 10px; 
+    background-color: #ed1c24;
+    color: white;
+    border-radius: 10px;
 }
 
 .newsletter-subscription h2 {
@@ -549,7 +702,7 @@ header label {
     border: none;
     padding: 15px 30px;
     font-size: 18px;
-    text-transform: capitalize; 
+    text-transform: capitalize;
     cursor: pointer;
     border-radius: 5px;
     transition: all 0.3s;
@@ -624,7 +777,7 @@ header label {
 }
 
 .footer-column ul li a:hover {
-    color: red;
+    color: #ed1c24;
 }
 
 .footer-column .contact-details li {
@@ -637,7 +790,7 @@ header label {
     background-color: white;
     border-radius: 50%;
     padding: 10px;
-    color: red;
+    color: #ed1c24;
     font-size: 1.2em;
 }
 
@@ -662,7 +815,7 @@ header label {
 }
 
 .social-icons a:hover {
-    background-color: red;
+    background-color: #ed1c24;
     color: white;
 }
 
@@ -736,7 +889,7 @@ header label {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: red;
+    background-color: #ed1c24;
     color: white;
     border: none;
     border-radius: 50%;
@@ -749,7 +902,7 @@ header label {
 
 .scroll-to-top:hover {
     background-color: white;
-    color: red;
+    color: #ed1c24;
 }
 
 .scroll-to-top:active {
@@ -779,7 +932,7 @@ header label {
 }
 
 .departments .nav-link:hover {
-    color: red;
+    color: #ed1c24;
 }
 
 .departments .tab-pane.active {
@@ -803,14 +956,14 @@ header label {
 }
 
 .nav-tabs .nav-link.active {
-    border-right: 3px solid red !important;
+    border-right: 3px solid #ed1c24 !important;
     border-left: none !important;
     border-top: none !important;
     border-bottom: none !important;
 }
 
 .nav-tabs .nav-link.active {
-    color: red !important;
+    color: #ed1c24 !important;
 }
 
 @media (max-width: 992px) {
@@ -821,6 +974,6 @@ header label {
 
     .departments .nav-link.active {
         color: #fff;
-        background: red;
+        background: #ed1c24;
     }
 }
