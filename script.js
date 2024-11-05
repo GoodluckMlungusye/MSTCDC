@@ -2,6 +2,29 @@
 const TOTAL_USERS = 200;
 const TOTAL_COUNTRIES = 126;
 
+// Define the video URL 
+const videoUrl = "https://www.youtube.com/watch?v=Dz121Oq4J6I";
+
+// Define the images for the slider
+const slidesData = [
+  { src: "./assets/h1.jpg", alt: "Slide 1" },
+  { src: "./assets/h2.jpg", alt: "Slide 2" },
+  { src: "./assets/h3.jpg", alt: "Slide 3" },
+  { src: "./assets/h4.jpg", alt: "Slide 4" },
+  { src: "./assets/h5.jpg", alt: "Slide 5" },
+  { src: "./assets/h6.jpg", alt: "Slide 6" },
+  { src: "./assets/h7.jpg", alt: "Slide 7" }
+];
+
+// Define featured categories and the number of courses to display for each
+const featuredCategories = {
+  "Master of Leadership and Governance": 4,
+  "SPA II Programmes": 2,
+  "BA in Leadership and Governance": 2,
+  "GIZ EnACT Program": 5,
+  "Professional Courses": 2,
+};
+
 // Testimonials array
 const testimonialsData = [
   {
@@ -36,15 +59,6 @@ const testimonialsData = [
   },
 ];
 
-// Define featured categories and the number of courses to display for each
-const featuredCategories = {
-  "Master of Leadership and Governance": 4,
-  "SPA II Programmes": 2,
-  "BA in Leadership and Governance": 2,
-  "GIZ EnACT Program": 5,
-  "Professional Courses": 2,
-};
-
 // Get elements to update their data-targets
 const coursesCountElement = document.getElementById("courses-count");
 const usersCountElement = document.getElementById("users-count");
@@ -60,11 +74,28 @@ function toggleMenu() {
   navMenu.classList.toggle("show");
 }
 
-// Hero Section Slider
+// Function to initialize the slider
+function initializeSlider() {
+  const sliderContainer = document.querySelector(".slider");
+  
+  // Create and append img elements for each slide in slidesData
+  slidesData.forEach((slide, index) => {
+    const img = document.createElement("img");
+    img.src = slide.src;
+    img.alt = slide.alt || `Slide ${index + 1}`;
+    img.classList.add("slide");
+    sliderContainer.appendChild(img);
+  });
+
+  // Start the slider functionality
+  startSlider();
+}
+
+// Slider variables and logic
 let currentSlide = 0;
-const slides = document.querySelectorAll(".slider img");
 
 function showSlide(index) {
+  const slides = document.querySelectorAll(".slider .slide");
   slides.forEach((slide, i) => {
     slide.classList.remove("active");
     if (i === index) {
@@ -74,15 +105,25 @@ function showSlide(index) {
 }
 
 function nextSlide() {
+  const slides = document.querySelectorAll(".slider .slide");
   currentSlide = (currentSlide + 1) % slides.length;
   showSlide(currentSlide);
 }
 
-// Show the first slide initially
-showSlide(currentSlide);
+// Start the slider by showing the first slide and setting up the interval
+function startSlider() {
+  const slides = document.querySelectorAll(".slider .slide");
+  
+  if (slides.length > 0) {
+    showSlide(currentSlide); // Show the first slide
 
-// Slide every 3 seconds
-setInterval(nextSlide, 3000);
+    // Automatically transition slides every 3 seconds
+    setInterval(nextSlide, 3000);
+  }
+}
+
+// Initialize the slider when the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", initializeSlider);
 
 // Fetch Courses API and display them
 const itemList = document.getElementById("item-list");
@@ -303,20 +344,23 @@ const observer = new IntersectionObserver((entries) => {
 
 observer.observe(statsSection);
 
-// Function to display video section
+// Function to convert different YouTube URL formats to an embeddable URL
+function getEmbedUrl(url) {
+  const urlObj = new URL(url);
+  let videoId = "";
+  
+  if (urlObj.hostname.includes("youtu.be")) {
+    videoId = urlObj.pathname.slice(1); // For short links like youtu.be/VIDEO_ID
+  } else if (urlObj.hostname.includes("youtube.com")) {
+    videoId = urlObj.searchParams.get("v"); // For full links like youtube.com/watch?v=VIDEO_ID
+  }
+
+  return `https://www.youtube.com/embed/${videoId}`;
+}
+
+// Set the video iframe src after converting the URL
 document.addEventListener("DOMContentLoaded", function () {
   const iframe = document.getElementById("videoIframe");
-  const videoUrl = iframe.getAttribute("data-video-url");
-  function getEmbedUrl(url) {
-    const urlObj = new URL(url);
-    let videoId = "";
-    if (urlObj.hostname.includes("youtu.be")) {
-      videoId = urlObj.pathname.slice(1);
-    } else if (urlObj.hostname.includes("youtube.com")) {
-      videoId = urlObj.searchParams.get("v");
-    }
-    return `https://www.youtube.com/embed/${videoId}`;
-  }
   iframe.src = getEmbedUrl(videoUrl);
 });
 
