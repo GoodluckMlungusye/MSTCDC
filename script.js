@@ -182,7 +182,8 @@ function loadCoursesAndCategories() {
       );
 
       // Process categories
-      categories = categoriesData;
+      categories = categoriesData.filter(courseCategory => courseCategory.name !== "Academic Program");
+
 
       // Display featured courses by category
       createCategoryButtons(categories);
@@ -305,6 +306,18 @@ function displayCourses(items) {
       <h3>${item.fullname}</h3>
       <p class="created-date">Added on ${createdDate}</p>
     `;
+      // Create the "View Course" button
+  const viewButton = document.createElement("button");
+  viewButton.textContent = "Read More";
+  viewButton.classList.add("view-button");
+
+  // Add click event to navigate to the course URL
+  viewButton.addEventListener("click", () => {
+    window.location.href = `https://lms.mstcdc.ac.tz/course/view.php?id=${item.id}`;
+  });
+
+  // Append the button to the itemCard
+  itemCard.appendChild(viewButton);
     itemList.appendChild(itemCard);
   });
 }
