@@ -1,0 +1,9 @@
+Uploading Slider Images
+
+- Go to root directory of the project and open script.js file
+- On top of the file you’ll find section for defining several constants
+- Find “Define the images for the slider” section
+- Before changing the image links go to assets folder and copy all the images you need for the slider into that folder.
+- Naming conventions for the images should be h1.jpg, h2.jpg, h3.jpg etc (jpg format is recommended)
+- After copying and renaming the images into required format within assets folder, go back to script.js into the section declared above and follow the format as described there.
+- with src attribute just change the name of the image if is h1, h2, h3 … etc also update the alt attribute to match the image number. For example if src =“./assets/h8.jpg” alt should be “Slide 8”
