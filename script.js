@@ -303,7 +303,7 @@ function displayCourses(items) {
     itemCard.innerHTML = `
       ${isNew ? '<div class="new-badge">New</div>' : ""}
       <img src="${courseImage}" alt="${item.fullname}">
-      <h3>${item.fullname}</h3>
+      <h3 class="course-title">${item.fullname}</h3>
       <p class="created-date">Added on ${createdDate}</p>
     `;
       // Create the "View Course" button
