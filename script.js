@@ -1,5 +1,5 @@
 // Define constants for Users and Countries
-const TOTAL_USERS = 200;
+const TOTAL_USERS = 300;
 const TOTAL_COUNTRIES = 126;
 
 // Define the video URL 

@@ -239,6 +239,12 @@ header label {
     margin: 0 20px;
 }
 
+.plus-sign::after {
+    content: "+";  
+    font-size: 1em; 
+    color: #ed1c24;
+    margin-left: 4px;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
