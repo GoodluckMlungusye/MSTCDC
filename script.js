@@ -269,6 +269,59 @@ function filterCoursesByCategory(categoryId) {
 }
 
 // Function to display courses
+// function displayCourses(items) {
+//   itemList.innerHTML = "";
+//   if (items.length === 0) {
+//     itemList.innerHTML = "<p>No courses found in this category.</p>";
+//     return;
+//   }
+
+//   const january2024 = new Date("2024-01-01").getTime() / 1000; // Timestamp for January 1, 2024
+
+//   items.forEach((item) => {
+//     const itemCard = document.createElement("div");
+//     itemCard.classList.add("item-card");
+
+//     // Check if the course image is available, if not use a default image
+//     const courseImage = item.courseimage
+//       ? item.courseimage
+//       : "assets/default.jpg";
+
+//     // Format the created date
+//     const createdDate = item.timecreated
+//       ? new Date(item.timecreated * 1000).toLocaleDateString("en-US", {
+//           year: "numeric",
+//           month: "long",
+//           day: "numeric",
+//         })
+//       : "Unknown";
+
+//     // Check if the course is "new" (added from January 2024 onwards)
+//     const isNew = item.timecreated >= january2024;
+
+//     // Construct the HTML for the course item
+//     itemCard.innerHTML = `
+//       ${isNew ? '<div class="new-badge">New</div>' : ""}
+//       <img src="${courseImage}" alt="${item.fullname}">
+//       <h3 class="course-title">${item.fullname}</h3>
+//       <p class="created-date">Added on ${createdDate}</p>
+//     `;
+//       // Create the "View Course" button
+//   const viewButton = document.createElement("button");
+//   viewButton.textContent = "Read More";
+//   viewButton.classList.add("view-button");
+
+//   // Add click event to navigate to the course URL
+//   viewButton.addEventListener("click", () => {
+//     window.location.href = `https://lms.mstcdc.ac.tz/course/view.php?id=${item.id}`;
+//   });
+
+//   // Append the button to the itemCard
+//   itemCard.appendChild(viewButton);
+//     itemList.appendChild(itemCard);
+//   });
+// }
+
 function displayCourses(items) {
   itemList.innerHTML = "";
   if (items.length === 0) {
@@ -285,41 +338,42 @@ function displayCourses(items) {
     // Check if the course image is available, if not use a default image
     const courseImage = item.courseimage
       ? item.courseimage
-      : "assets/default.jpg";
-
-    // Format the created date
-    const createdDate = item.timecreated
-      ? new Date(item.timecreated * 1000).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
-      : "Unknown";
+      : "./assets/default.jpg";
 
     // Check if the course is "new" (added from January 2024 onwards)
     const isNew = item.timecreated >= january2024;
+
+    // Limit the course description to 50 words
+    const courseDescription = limitWords(item.summary, 50);
 
     // Construct the HTML for the course item
     itemCard.innerHTML = `
       ${isNew ? '<div class="new-badge">New</div>' : ""}
       <img src="${courseImage}" alt="${item.fullname}">
       <h3 class="course-title">${item.fullname}</h3>
-      <p class="created-date">Added on ${createdDate}</p>
+      <p class="course-description">${courseDescription}</p>
     `;
-      // Create the "View Course" button
-  const viewButton = document.createElement("button");
-  viewButton.textContent = "Read More";
-  viewButton.classList.add("view-button");
 
-  // Add click event to navigate to the course URL
-  viewButton.addEventListener("click", () => {
-    window.location.href = `https://lms.mstcdc.ac.tz/course/view.php?id=${item.id}`;
-  });
+    // Create the "Read More" button
+    const viewButton = document.createElement("button");
+    viewButton.textContent = "Read More";
+    viewButton.classList.add("view-button");
 
-  // Append the button to the itemCard
-  itemCard.appendChild(viewButton);
+    // Add click event to navigate to the course URL
+    viewButton.addEventListener("click", () => {
+      window.location.href = `https://lms.mstcdc.ac.tz/course/view.php?id=${item.id}`;
+    });
+
+    // Append the button to the itemCard
+    itemCard.appendChild(viewButton);
     itemList.appendChild(itemCard);
   });
+}
+
+// Helper function to limit text to a certain number of words
+function limitWords(text, limit) {
+  const words = text.split(" ");
+  return words.length > limit ? words.slice(0, limit).join(" ") + "..." : text;
 }
 
 // Load all courses and categories once the page is ready
