@@ -2,8 +2,13 @@
 const TOTAL_USERS = 300;
 const TOTAL_COUNTRIES = 126;
 
-// Define the video URL 
-const videoUrl = "https://www.youtube.com/watch?v=Dz121Oq4J6I";
+// Define an array of video URLs
+const videoUrls = [
+  "https://www.youtube.com/watch?v=Dz121Oq4J6I",
+  "https://www.youtube.com/watch?v=eJKmCQAQqsU&list=PLr6q9pBATXH9VAhLcbuwWuGvGjQtWYfWD&index=1",
+  "https://www.youtube.com/watch?v=9j-ir0xpAeA&list=PLr6q9pBATXH9jMfF6k1U1ms4Qii8xQRot&index=1",
+  "https://youtu.be/5_E3j2AbLTo?si=x7DfAneyQBS1Fti2"
+];
 
 // Define the images for the slider
 const slidesData = [
@@ -13,7 +18,7 @@ const slidesData = [
   { src: "./assets/h4.jpg", alt: "Slide 4" },
   { src: "./assets/h5.jpg", alt: "Slide 5" },
   { src: "./assets/h6.jpg", alt: "Slide 6" },
-  { src: "./assets/h7.jpg", alt: "Slide 7" }
+  { src: "./assets/h7.jpg", alt: "Slide 7" },
 ];
 
 // Define featured categories and the number of courses to display for each
@@ -28,34 +33,40 @@ const featuredCategories = {
 // Testimonials array
 const testimonialsData = [
   {
-    text: "MS TCDC Learning Center has transformed my learning experience. I can't recommend it enough.",
-    name: "John Doe",
-    jobTitle: "Business Analyst",
-    image: "./assets/testimonials/t1.jpeg",
+    text: "The HRBA course has been an eye-opening experience, helping me connect human rights advocacy with the work I do in South Africa. It emphasized the importance of inclusivity and unity across African nations. I’ve gained valuable insights into fostering collaboration within communities and between stakeholders, which will strengthen my advocacy efforts.",
+    name: "Sibonelo Mavuso, South Africa",
+    jobTitle: "Human Rights- based Approach (HRBA) Participant",
+    image: "./assets/testimonials/user.jpg",
   },
   {
-    text: "Amazing platform! I've gained so much knowledge and confidence in my field.",
-    name: "Jane Smith",
-    jobTitle: "Marketing Manager",
-    image: "./assets/testimonials/t2.jpeg",
+    text: "As our organization continues to expand, we face the challenge of growing activities while our funding remains the same. Through the resource mobilization program, I’ve gained valuable knowledge and techniques to bridge this financial gap. This experience has shown me that with the right methodologies, applied to the right groups at the right time, it is indeed possible to successfully raise resources and funds.",
+    name: "Goodluck Mmary, Tanzania",
+    jobTitle: "EWURA Consumer Consultative Council",
+    image: "./assets/testimonials/user.jpg",
   },
   {
-    text: "Highly recommend MS TCDC Learning Center. The staff and instructors are excellent!",
-    name: "Sam Wilson",
-    jobTitle: "Software Developer",
-    image: "./assets/testimonials/t3.jpeg",
+    text: "This course exceeded my expectations! I not only learned outcome mapping and harvesting but also honed my skills in result-based management and reporting which shifted my focus toward achieving measurable results rather than just completing activities. The small class size, diverse participants, and hands-on facilitation made it a transformative experience. I’m excited to apply these tools in my work, especially in qualitative assessments within human rights and democracy.",
+    name: "Alvin Wafula, Kenya",
+    jobTitle: "Outcome Harvesting Participant",
+    image: "./assets/testimonials/user.jpg",
   },
   {
-    text: "Incredible learning environment and superb support! Helped me grow in my career.",
-    name: "Alice Brown",
-    jobTitle: "HR Specialist",
-    image: "./assets/testimonials/t4.jpeg",
+    text: "Enrolling in the Master of Leadership and Governance program has been transformative for me. As a climate justice activist and feminist, this course has shaped my leadership skills, strategic thinking, and emotional intelligence to tackle global crises like climate change. Learning about governance, leadership theories, and innovative solutions has given me the tools to contribute to policy changes and address societal challenges, particularly in Africa. I’m inspired to become the kind of leader my community and continent need.",
+    name: "Magadele Idiang, Nigeria",
+    jobTitle: "Master of Leadership and Governance",
+    image: "./assets/testimonials/user.jpg",
   },
   {
-    text: "The courses are well-structured, and the instructors are highly professional.",
-    name: "Michael Lee",
-    jobTitle: "Data Scientist",
-    image: "./assets/testimonials/t5.jpeg",
+    text: "The Climate Justice Academy opened my eyes to the shared struggle of communities worldwide. It reinforced that even small efforts can make a significant impact and inspired me to act locally while thinking globally for a just and sustainable future.",
+    name: "Climate Justice Academy Participant, 2022",
+    jobTitle: "Zambia",
+    image: "./assets/testimonials/user.jpg",
+  },
+  {
+    text: "The flexible learning format allowed me to balance my professional, family, and academic commitments seamlessly. I've gained valuable skills in leadership, problem-solving, and decision-making that have already made a positive impact in my work.",
+    name: "Debra Ode, Nigeria",
+    jobTitle: "Master of Leadership and Governance",
+    image: "./assets/testimonials/user.jpg",
   },
 ];
 
@@ -77,7 +88,7 @@ function toggleMenu() {
 // Function to initialize the slider
 function initializeSlider() {
   const sliderContainer = document.querySelector(".slider");
-  
+
   // Create and append img elements for each slide in slidesData
   slidesData.forEach((slide, index) => {
     const img = document.createElement("img");
@@ -113,7 +124,7 @@ function nextSlide() {
 // Start the slider by showing the first slide and setting up the interval
 function startSlider() {
   const slides = document.querySelectorAll(".slider .slide");
-  
+
   if (slides.length > 0) {
     showSlide(currentSlide); // Show the first slide
 
@@ -182,8 +193,9 @@ function loadCoursesAndCategories() {
       );
 
       // Process categories
-      categories = categoriesData.filter(courseCategory => courseCategory.name !== "Academic Program");
-
+      categories = categoriesData.filter(
+        (courseCategory) => courseCategory.name !== "Academic Program"
+      );
 
       // Display featured courses by category
       createCategoryButtons(categories);
@@ -415,20 +427,40 @@ observer.observe(statsSection);
 function getEmbedUrl(url) {
   const urlObj = new URL(url);
   let videoId = "";
-  
+
   if (urlObj.hostname.includes("youtu.be")) {
-    videoId = urlObj.pathname.slice(1); // For short links like youtu.be/VIDEO_ID
+    videoId = urlObj.pathname.slice(1); 
   } else if (urlObj.hostname.includes("youtube.com")) {
-    videoId = urlObj.searchParams.get("v"); // For full links like youtube.com/watch?v=VIDEO_ID
+    videoId = urlObj.searchParams.get("v");
   }
 
   return `https://www.youtube.com/embed/${videoId}`;
 }
 
-// Set the video iframe src after converting the URL
-document.addEventListener("DOMContentLoaded", function () {
+// Function to update the iframe src
+function updateVideo(index) {
   const iframe = document.getElementById("videoIframe");
-  iframe.src = getEmbedUrl(videoUrl);
+  iframe.src = getEmbedUrl(videoUrls[index]);
+}
+
+// Initialize the slider
+let currentVideoIndex = 0;
+document.addEventListener("DOMContentLoaded", function () {
+  // Set initial video
+  updateVideo(currentVideoIndex);
+
+  // Handle Previous button
+  document.getElementById("prevButton").addEventListener("click", function () {
+    currentVideoIndex =
+      (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
+    updateVideo(currentVideoIndex);
+  });
+
+  // Handle Next button
+  document.getElementById("nextButton").addEventListener("click", function () {
+    currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
+    updateVideo(currentVideoIndex);
+  });
 });
 
 // Function to display testimonials dynamically
@@ -441,16 +473,26 @@ function displayTestimonials(testimonials) {
     const testimonialCard = document.createElement("div");
     testimonialCard.classList.add("testimonial-card");
 
+    // testimonialCard.innerHTML = `
+    //   <p class="testimonial-text">"${testimonial.text}"</p>
+    //   <div class="client-info">
+    //     <img src="${testimonial.image}" alt="${testimonial.name}" class="client-photo" />
+    //     <div>
+    //       <h4>${testimonial.name}</h4>
+    //       <p>${testimonial.jobTitle}</p>
+    //     </div>
+    //   </div>
+    // `;
+
     testimonialCard.innerHTML = `
-      <p class="testimonial-text">"${testimonial.text}"</p>
-      <div class="client-info">
-        <img src="${testimonial.image}" alt="${testimonial.name}" class="client-photo" />
-        <div>
-          <h4>${testimonial.name}</h4>
-          <p>${testimonial.jobTitle}</p>
-        </div>
+    <p class="testimonial-text">"${testimonial.text}"</p>
+    <div class="client-info">
+\      <div>
+        <h4>${testimonial.name}</h4>
+        <p>${testimonial.jobTitle}</p>
       </div>
-    `;
+    </div>
+  `;
 
     testimonialTrack.appendChild(testimonialCard);
   });
