@@ -439,11 +439,13 @@ header label {
     background-color: white;
     color: #ed1c24;
     border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
+    padding: 8px 10px;
+    font-size: 0.8rem;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    border-radius: 5px;
+    min-width: 80px;
 }
 
 .video-slider-button:hover {
@@ -891,29 +893,27 @@ header label {
 
 .row {
     display: flex;
-    flex-wrap: wrap; /* Ensures responsiveness */
+    flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px;
   }
   
   .column {
     flex: 1;
-    min-width: 300px; /* Minimum width for responsiveness */
+    min-width: 300px;
     margin: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    overflow: hidden;
-    background-color: #fff;
+    background-color: #F4F7E5;
   }
   
   .content {
     display: flex;
-    flex-direction: row; /* Horizontal by default for large screens */
+    flex-direction: row;
     gap: 15px;
   }
   
   .image-container {
-    flex: 1; /* Ensures equal width with the link list */
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -926,7 +926,7 @@ header label {
   }
   
   .link-list {
-    flex: 1; /* Ensures equal width with the image container */
+    flex: 1; 
     padding: 10px;
   }
   
@@ -943,8 +943,8 @@ header label {
   }
   
   .link-list li img {
-    width: 24px; /* Set width for icons */
-    height: 24px; /* Set height for icons */
+    width: 24px;
+    height: 24px;
     margin-right: 10px;
   }
   
@@ -955,19 +955,19 @@ header label {
   }
   
   .link-list a:hover {
-    color: #007bff;
+    color: #ed1c24;
   }
   
   /* Responsive Design */
   @media (max-width: 768px) {
     .content {
-      flex-direction: column; /* Stack vertically for smaller screens */
+      flex-direction: column;
       align-items: center;
     }
   
     .image-container, .link-list {
-      flex: unset; /* Reset flex behavior for vertical stacking */
-      width: 100%; /* Full width in vertical layout */
+      flex: unset;
+      width: 100%;
     }
   
     .image-container img {
