@@ -423,45 +423,70 @@ const observer = new IntersectionObserver((entries) => {
 
 observer.observe(statsSection);
 
-// Function to convert different YouTube URL formats to an embeddable URL
+let currentVideoIndex = 0;
+
+// Convert YouTube URL to embeddable URL
 function getEmbedUrl(url) {
   const urlObj = new URL(url);
   let videoId = "";
-
   if (urlObj.hostname.includes("youtu.be")) {
-    videoId = urlObj.pathname.slice(1); 
+    videoId = urlObj.pathname.slice(1);
   } else if (urlObj.hostname.includes("youtube.com")) {
     videoId = urlObj.searchParams.get("v");
   }
-
   return `https://www.youtube.com/embed/${videoId}`;
 }
 
-// Function to update the iframe src
-function updateVideo(index) {
-  const iframe = document.getElementById("videoIframe");
-  iframe.src = getEmbedUrl(videoUrls[index]);
+// Update the carousel and bullets
+function updateCarousel() {
+  const containers = document.querySelectorAll(".video-container");
+  containers.forEach((container, index) => {
+    const videoIndex = (currentVideoIndex + index - 1 + videoUrls.length) % videoUrls.length;
+    const iframe = container.querySelector("iframe");
+    iframe.src = getEmbedUrl(videoUrls[videoIndex]);
+    container.classList.toggle("center", index === 1);
+  });
+
+  const bullets = document.querySelectorAll(".bullet");
+  bullets.forEach((bullet, index) => {
+    bullet.classList.toggle("active", index === currentVideoIndex);
+  });
+}
+
+// Create bullets dynamically
+function createBullets() {
+  const bulletsContainer = document.querySelector(".video-bullets");
+  bulletsContainer.innerHTML = "";
+  videoUrls.forEach((_, index) => {
+    const bullet = document.createElement("div");
+    bullet.classList.add("bullet");
+    if (index === currentVideoIndex) bullet.classList.add("active");
+    bullet.addEventListener("click", () => {
+      currentVideoIndex = index;
+      updateCarousel();
+    });
+    bulletsContainer.appendChild(bullet);
+  });
 }
 
 // Initialize the slider
-let currentVideoIndex = 0;
-document.addEventListener("DOMContentLoaded", function () {
-  // Set initial video
-  updateVideo(currentVideoIndex);
+document.addEventListener("DOMContentLoaded", () => {
+  createBullets();
+  updateCarousel();
 
   // Handle Previous button
-  document.getElementById("prevButton").addEventListener("click", function () {
-    currentVideoIndex =
-      (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
-    updateVideo(currentVideoIndex);
+  document.getElementById("prevButton").addEventListener("click", () => {
+    currentVideoIndex = (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
+    updateCarousel();
   });
 
   // Handle Next button
-  document.getElementById("nextButton").addEventListener("click", function () {
+  document.getElementById("nextButton").addEventListener("click", () => {
     currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
-    updateVideo(currentVideoIndex);
+    updateCarousel();
   });
 });
+
 
 // Function to display testimonials dynamically
 function displayTestimonials(testimonials) {

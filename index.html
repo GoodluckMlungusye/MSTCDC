@@ -10,6 +10,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
     <link rel="icon" href="./assets/logo.png" type="image/png" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet" />
@@ -280,40 +284,48 @@
     <!-- End Departments Section -->
 
     <!-- Video Section -->
-
-    <!-- <section class="video">
-      <div class="video-section">
-        <div class="video-container">
-          <iframe
-            id="videoIframe"
-            class="responsive-video"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </div>
-    </section> -->
-
     <section class="video">
       <div class="video-section">
         <div class="video-slider">
-          <div class="video-container">
-            <iframe
-              id="videoIframe"
-              class="responsive-video"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+          <i
+            id="prevButton"
+            class="video-slider-arrow left-arrow fas fa-chevron-left"
+          ></i>
+          <div class="video-carousel">
+            <div class="video-container">
+              <iframe
+                class="responsive-video"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="video-container">
+              <iframe
+                class="responsive-video"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="video-container">
+              <iframe
+                class="responsive-video"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
           </div>
+          <i
+            id="nextButton"
+            class="video-slider-arrow right-arrow fas fa-chevron-right"
+          ></i>
         </div>
-        <div class="video-slider-controls">
-          <button id="prevButton" class="video-slider-button">Previous</button>
-          <button id="nextButton" class="video-slider-button">Next</button>
-        </div>
+        <div class="video-bullets"></div>
       </div>
     </section>
 
@@ -391,6 +403,108 @@
     </section>
 
     <!-- Footer -->
+    <div class="podcast">
+      <h2 class="stats-title">Listen to our Series of Podcasts</h2>
+    </div>
+    <footer class="pfooter">
+      <div class="row">
+        <!-- TOGETHER FOR IMPACT -->
+        <div class="column">
+          <div class="content">
+            <div class="image-container">
+              <img src="./assets/impact.png" alt="Image 1" />
+            </div>
+            <div class="link-list">
+              <ul>
+                <li>
+                  <img
+                    src="./assets/podbean.png"
+                    alt="podbean"
+                    style="width: 60px; height: auto"
+                  />
+                  <a
+                    href="https://mstcdc.podbean.com
+                  "
+                    >Podbean</a
+                  >
+                </li>
+                <li>
+                  <img
+                    src="./assets/spotify.svg"
+                    alt="spotify"
+                    style="width: 60px; height: auto; border-radius: 10px"
+                  />
+                  <a
+                    href="https://open.spotify.com/show/7mQDXE3J04mSg837I3iDux
+                  "
+                    >Spotify</a
+                  >
+                </li>
+                <li>
+                  <img
+                    src="./assets/apple-music.png"
+                    alt="apple"
+                    style="width: 60px; height: auto"
+                  />
+                  <a
+                    href="https://podcasts.apple.com/tz/podcast/together-for-impact/id1361984497"
+                    >Apple</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- TROUBLEMAKERS -->
+        <div class="column">
+          <div class="content">
+            <div class="image-container">
+              <img src="./assets/trouble.jpg" alt="Image 2" />
+            </div>
+            <div class="link-list">
+              <ul>
+                <li>
+                  <img
+                    src="./assets/podbean.png"
+                    alt="podbean"
+                    style="width: 60px; height: auto"
+                  />
+                  <a
+                    href="https://troublemakers.podbean.com
+                  "
+                    >Podbean</a
+                  >
+                </li>
+                <li>
+                  <img
+                    src="./assets/spotify.svg"
+                    alt="spotify"
+                    style="width: 60px; height: auto; border-radius: 10px"
+                  />
+                  <a
+                    href="https://open.spotify.com/show/2a7uJ8u0WyRWSA2Mum7Z6Y
+                  "
+                    >Spotify</a
+                  >
+                </li>
+                <li>
+                  <img
+                    src="./assets/apple-music.png"
+                    alt="apple"
+                    style="width: 60px; height: auto"
+                  />
+                  <a
+                    href="https://podcasts.apple.com/tz/podcast/troublemakers/id1768942914"
+                    >Apple</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <footer class="footer">
       <div class="container">
         <div class="footer-columns">
@@ -498,108 +612,6 @@
       </div>
     </footer>
 
-    <footer class="pfooter">
-      <div class="row">
-        <!-- TOGETHER FOR IMPACT -->
-        <div class="column">
-          <div class="content">
-            <div class="image-container">
-              <img src="./assets/impact.png" alt="Image 1" />
-            </div>
-            <div class="link-list">
-              <ul>
-                <li>
-                  <img
-                    src="./assets/podbean.png"
-                    alt="podbean"
-                    style="width: 60px; height: auto"
-                  />
-                  <a
-                    href="https://mstcdc.podbean.com
-                  "
-                    >Podbean</a
-                  >
-                </li>
-                <li>
-                  <img
-                    src="./assets/spotify.svg"
-                    alt="spotify"
-                    style="width: 60px; height: auto; border-radius: 10px"
-                  />
-                  <a
-                    href="https://open.spotify.com/show/7mQDXE3J04mSg837I3iDux
-                  "
-                    >Spotify</a
-                  >
-                </li>
-                <li>
-                  <img
-                    src="./assets/apple-music.png"
-                    alt="apple"
-                    style="width: 60px; height: auto"
-                  />
-                  <a
-                    href="https://podcasts.apple.com/tz/podcast/together-for-impact/id1361984497"
-                    >Apple</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- TROUBLEMAKERS -->
-        <div class="column">
-          <div class="content">
-            <div class="image-container">
-              <img
-                src="./assets/trouble.jpg"
-                alt="Image 2"
-                style="height: 350px; width: auto"
-              />
-            </div>
-            <div class="link-list">
-              <ul>
-                <li>
-                  <img
-                    src="./assets/podbean.png"
-                    alt="podbean"
-                    style="width: 60px; height: auto"
-                  />
-                  <a
-                    href="https://troublemakers.podbean.com
-                  "
-                    >Podbean</a
-                  >
-                </li>
-                <li>
-                  <img
-                    src="./assets/spotify.svg"
-                    alt="spotify"
-                    style="width: 60px; height: auto; border-radius: 10px"
-                  />
-                  <a
-                    href="https://open.spotify.com/show/2a7uJ8u0WyRWSA2Mum7Z6Y
-                  "
-                    >Spotify</a
-                  >
-                </li>
-                <li>
-                  <img
-                    src="./assets/apple-music.png"
-                    alt="apple"
-                    style="width: 60px; height: auto"
-                  />
-                  <a
-                    href="https://podcasts.apple.com/tz/podcast/troublemakers/id1768942914"
-                    >Apple</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
     <!-- Scroll to Top Button -->
     <button id="scrollToTopBtn" class="scroll-to-top" style="display: none">
       ↑
