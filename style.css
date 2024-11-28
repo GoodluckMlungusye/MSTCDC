@@ -383,7 +383,6 @@ header label {
 }
 
 /* Video Section */
-
 .video {
     font-family: Arial, sans-serif;
     background-color: #ed1c24;
@@ -396,7 +395,6 @@ header label {
 .video-section {
     width: 100%;
     max-width: 1050px;
-    padding: 20px;
     text-align: center;
 }
 
@@ -409,7 +407,7 @@ header label {
 
 .video-carousel {
     display: flex;
-    gap: 30px;
+    gap: 10px;
     width: 100%;
     position: relative;
 }
@@ -417,7 +415,7 @@ header label {
 .video-container {
     flex: 0 0 32%;
     position: relative;
-    padding-top: 40%;
+    padding-top: 18%;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
@@ -480,11 +478,10 @@ header label {
 }
 
 /* Responsive Design */
-
 @media (max-width: 768px) {
     .video-container {
         flex: 0 0 45%;
-        padding-top: 56.25%;
+        padding-top: 25%; 
     }
 }
 
@@ -494,6 +491,7 @@ header label {
         padding-top: 56.25%;
     }
 }
+
 
 
 /* Testimonials Section */
@@ -914,6 +912,10 @@ header label {
 
 
 /* Footer Section */
+
+.trouble{
+    margin-top: -20px;
+}
 
 .podcast {
     background-color: #F4F7E5;
