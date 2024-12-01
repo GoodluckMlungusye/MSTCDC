@@ -158,7 +158,7 @@ function loadCoursesAndCategories() {
       "https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_search_courses&moodlewsrestformat=json&criterianame=search&criteriavalue="
     ).then((response) => response.json()),
 
-    // Fetch courses with timecreated from the new API
+    // Fetch courses with timecreated and visible from the new API
     fetch(
       "https://lms.mstcdc.ac.tz/webservice/rest/server.php?wstoken=dbac8af81c4e9ba1b6e20ecff981134f&wsfunction=core_course_get_courses&moodlewsrestformat=json"
     ).then((response) => response.json()),
@@ -175,16 +175,19 @@ function loadCoursesAndCategories() {
       coursesCountElement.setAttribute("data-target", totalCourses);
       countUpElements.forEach((element) => countUp(element));
 
-      // Process courses with timecreated
+      // Process courses with timecreated and visible
       const timeCreatedMap = {};
+      const visibilityMap = {};
       coursesWithTimeCreated.forEach((course) => {
         timeCreatedMap[course.id] = course.timecreated;
+        visibilityMap[course.id] = course.visible;
       });
 
-      // Merge timecreated into allCourses
+      // Merge timecreated and visible into allCourses
       coursesWithDate = allCourses.map((course) => ({
         ...course,
         timecreated: timeCreatedMap[course.id] || null,
+        visible: visibilityMap[course.id] || null, // Add visible attribute
       }));
 
       // Sort courses by timecreated (latest first)
@@ -207,6 +210,7 @@ function loadCoursesAndCategories() {
       console.error("Error fetching data:", error);
     });
 }
+
 
 // Function to get featured courses by category and random selection
 function getFeaturedCourses() {
@@ -275,7 +279,7 @@ function updateActiveButton(activeButton) {
 // Function to filter courses by category ID
 function filterCoursesByCategory(categoryId) {
   const filteredCourses = coursesWithDate.filter(
-    (course) => course.categoryid === categoryId
+    (course) => course.categoryid === categoryId && course.visible === 1
   );
   displayCourses(filteredCourses);
 }

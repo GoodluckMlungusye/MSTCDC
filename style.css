@@ -630,7 +630,7 @@ header label {
 }
 
 .owner span {
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 500;
 }
 
@@ -650,7 +650,7 @@ header label {
 
 
 .mobile-desc span {
-    font-size: 20px;
+    font-size: 25px;
     color: white;
     font-weight: lighter;
 }
@@ -680,24 +680,16 @@ header label {
 @media (max-width: 991px) {
 
     .owner span {
-        font-size: 20px;
+        font-size: 25px;
     }
 
     .mobile-desc span {
-        font-size: 18px;
+        font-size: 23px;
     }
 
 }
 
 @media (max-width: 572px) {
-
-    .owner span {
-        font-size: 18px;
-    }
-
-    .mobile-desc span {
-        font-size: 15px;
-    }
 
     .mobile-block img {
         height: 30px;
