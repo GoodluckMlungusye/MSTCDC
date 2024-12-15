@@ -479,6 +479,12 @@ header label {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+    .video-carousel {
+        overflow: hidden;
+        gap: 0;
+    } 
+
     .video-container {
         flex: 0 0 45%;
         padding-top: 25%; 
@@ -489,6 +495,9 @@ header label {
     .video-container {
         flex: 0 0 100%;
         padding-top: 56.25%;
+    }
+    #nextButton{
+        display: none;
     }
 }
 
