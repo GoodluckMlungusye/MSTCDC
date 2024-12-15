@@ -437,8 +437,8 @@ header label {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    color: black;
-    font-size: 2rem;
+    color: #000;
+    font-size: 24px;
     cursor: pointer;
     z-index: 10;
     transition: color 0.3s ease;
@@ -492,8 +492,6 @@ header label {
     }
 }
 
-
-
 /* Testimonials Section */
 .testimonials {
     background-color: #f8f8f8;
@@ -509,6 +507,7 @@ header label {
 }
 
 /* Testimonial Slider */
+
 .testimonial-slider {
     overflow: hidden;
     max-width: 100%;
@@ -518,15 +517,17 @@ header label {
 .testimonial-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    max-width: 100%; /* Ensure the track doesn't exceed the container */
 }
 
 /* Displaying multiple testimonials per view */
+
 .testimonial-card {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    flex: 1 0 33.33%;
+    flex: 1 0 calc(33.33% - 20px); /* Adjusted for margins */
     box-sizing: border-box;
     margin: 10px;
 }
@@ -579,8 +580,8 @@ header label {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #ed1c24;
-    color: #fff;
+    background-color: transparent;
+    color: #000;
     border: none;
     padding: 10px;
     font-size: 24px;

@@ -7,7 +7,10 @@ const videoUrls = [
   "https://www.youtube.com/watch?v=Dz121Oq4J6I",
   "https://www.youtube.com/watch?v=eJKmCQAQqsU&list=PLr6q9pBATXH9VAhLcbuwWuGvGjQtWYfWD&index=1",
   "https://www.youtube.com/watch?v=9j-ir0xpAeA&list=PLr6q9pBATXH9jMfF6k1U1ms4Qii8xQRot&index=1",
-  "https://youtu.be/5_E3j2AbLTo?si=x7DfAneyQBS1Fti2"
+  "https://youtu.be/5_E3j2AbLTo?si=x7DfAneyQBS1Fti2",
+  "https://www.youtube.com/watch?v=PKeHzZLahz8&list=PLr6q9pBATXH9vjwBDxqFfRiTM2BSsEtnB&index=6",
+  "https://www.youtube.com/watch?v=PdYpgLRmfjI",
+  "https://www.youtube.com/watch?v=hMD37vJ_VXY"
 ];
 
 // Define the images for the slider
