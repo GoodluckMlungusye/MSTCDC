@@ -665,6 +665,27 @@ header label {
     font-weight: lighter;
 }
 
+@media (max-width:1364px){
+    .owner span {
+        font-size: 25px;
+    }
+
+    .mobile-desc span {
+        font-size: 23px;
+    }
+}
+
+@media (max-width:1258px){
+    .owner span {
+        font-size: 23px;
+    }
+
+    .mobile-desc span {
+        font-size: 20px;
+    }
+}
+
+
 @media (max-width: 1222px) {
 
     .mobile {
@@ -686,6 +707,7 @@ header label {
     }
 
 }
+
 
 @media (max-width: 991px) {
 
