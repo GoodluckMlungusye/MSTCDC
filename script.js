@@ -55,7 +55,7 @@ const testimonialsData = [
   },
   {
     text: "Enrolling in the Master of Leadership and Governance program has been transformative for me. As a climate justice activist and feminist, this course has shaped my leadership skills, strategic thinking, and emotional intelligence to tackle global crises like climate change. Learning about governance, leadership theories, and innovative solutions has given me the tools to contribute to policy changes and address societal challenges, particularly in Africa. I’m inspired to become the kind of leader my community and continent need.",
-    name: "Magadele Idiang, Nigeria",
+    name: "Magdalene Idiang, Nigeria",
     jobTitle: "Master of Leadership and Governance",
     image: "./assets/testimonials/user.jpg",
   },
