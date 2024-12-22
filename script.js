@@ -227,7 +227,7 @@ function getFeaturedCourses() {
     if (category) {
       // Filter courses in this category
       const coursesInCategory = coursesWithDate.filter(
-        (course) => course.categoryid === category.id
+        (course) => course.categoryid === category.id && course.visible === 1
       );
 
       // Randomly select the specified number of courses
